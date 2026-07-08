@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crumb & Co. | Artisan Bakery</title>
+    <style>
+        /* --- 1. VARIABLES & RESET --- */
+        :root {
+            --bg-color: #000000;
+            --card-bg: #161617;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent-blue: #2997ff;
+            --accent-blue-hover: #0077ed;
+            --nav-bg: rgba(22, 22, 23, 0.8);
+            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.4s;
+            --cart-width: 380px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- 2. NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 54px;
+            background: var(--nav-bg);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 13px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        /* Desktop Links */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #d1d1d1;
+            font-weight: 400;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Mobile Menu Icon */
+        .mobile-menu-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        .cart-btn {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--accent-blue);
+        }
+        
+        .cart-count {
+            background: var(--accent-blue);
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            display: none; /* Hidden until item added */
+        }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 60px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('bakery_hero.png') center/cover no-repeat;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+            background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: white;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-blue-hover);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-blue);
+            border: 1px solid rgba(41, 151, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(41, 151, 255, 0.1);
+            border-color: var(--accent-blue);
+        }
+
+        /* --- 4. SECTIONS GENERAL --- */
+        section {
+            padding: 100px 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h3 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 19px;
+        }
+
+        /* --- 5. PRODUCT GRID --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            height: 500px;
+            border-radius: 22px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .card-image {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            z-index: 2;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .card h4 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: var(--text-primary);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .add-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-btn:hover {
+            background: var(--accent-blue-hover);
+            transform: scale(1.05);
+        }
+
+        /* --- 6. ABOUT SECTION --- */
+        .about-section {
+            background-color: #0a0a0a;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            border-radius: 22px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text {
+            max-width: 500px;
+        }
+
+        .about-text h3 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* --- 7. CONTACT & FOOTER --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info div {
+            margin-bottom: 30px;
+        }
+
+        .contact-info h4 {
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #1d1d1f;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            border: 1px solid #333;
+        }
+
+        footer {
+            background-color: #000;
+            color: var(--text-secondary);
+            padding: 60px 20px;
+            font-size: 12px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        /* --- 8. CART DRAWER (Slide Out) --- */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1001;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: var(--cart-width);
+            height: 100%;
+            background: #1d1d1f;
+            z-index: 1002;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+
+        .cart-overlay.open .cart-drawer {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart {
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .cart-item-details h5 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-details p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #333;
+            background: #222;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background: var(--accent-blue-hover);
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 50px;
+        }
+
+        /* --- 9. TOAST NOTIFICATION --- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 40px; }
+            .hero p { font-size: 18px; }
+            
+            .mobile-menu-icon {
+                display: block;
+                color: #fff;
+                font-size: 24px;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 54px;
+                left: 0;
+                width: 100%;
+                background: #000;
+                flex-direction: column;
+                padding: 20px 0;
+                gap: 20px;
+                display: none; /* Hidden by default on mobile */
+                border-bottom: 1px solid #333;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Crumb & Co.</a>
+            
+            <!-- Mobile Toggle -->
+            <div class="mobile-menu-icon" onclick="toggleMenu()">☰</div>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#bakery" onclick="toggleMenu()">Bakery</a>
+                <a href="#coffee" onclick="toggleMenu()">Coffee</a>
+                <a href="#about" onclick="toggleMenu()">Our Story</a>
+                <a href="#contact" onclick="toggleMenu()">Contact</a>
+                
+                <!-- Functional Cart Trigger -->
+                <div class="cart-btn" onclick="toggleCart()">
+                    <span>Bag</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CART DRAWER -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart(event)">
+        <div class="cart-drawer">
+            <div class="cart-header">
+                <span>Your Bag</span>
+                <span class="close-cart" onclick="toggleCart()">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItemsContainer">
+                <!-- Items injected by JS -->
+                <p class="empty-cart-msg">Your bag is empty.</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="fade-up">Sourdough. Redefined.</h1>
+            <p class="fade-up delay-1">Artisanal bread baked with time, patience, and precision.</p>
+            
+            <div class="cta-group fade-up delay-2">
+                <a href="#bakery" class="btn btn-primary">Order Now</a>
+                <a href="#about" class="btn btn-secondary">Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BAKERY SECTION -->
+    <section id="bakery">
+        <div class="section-header fade-up">
+            <h3>The Bakery.</h3>
+            <p>Leavened naturally. Baked to perfection.</p>
+        </div>
+
+        <div class="grid-container">
+            <!-- Item 1 -->
+            <div class="card fade-up">
+                <div class="card-content">
+                    <h4>Classic Sourdough</h4>
+                    <p>48-hour fermentation.</p>
+                    <span class="price">$8.00</span>
+                    <button class="add-btn" onclick="addToCart('Classic Sourdough', 8.00, 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2670')">Add to Bag</button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2670" class="card-image" alt="Sourdough">
+            </div>
+
+            <!-- Item 2 -->
+            <div class="card fade-up">
+                <div class="card-content">
+                    <h4>Seeded Rye</h4>
+                    <p>Dense, hearty, packed with seeds.</p>
+                    <span class="price">$9.50</span>
+                    <button class="add-btn" onclick="addToCart('Seeded Rye', 9.50, 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2672')">Add to Bag</button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2672" class="card-image" alt="Rye">
+            </div>
+
+            <!-- Item 3 -->
+            <div class="card fade-up">
+                <div class="card-content">
+                    <h4>Butter Croissant</h4>
+                    <p>72 layers of pure butter.</p>
+                    <span class="price">$4.50</span>
+                    <button class="add-btn" onclick="addToCart('Butter Croissant', 4.50, 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=2526')">Add to Bag</button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=2526" class="card-image" alt="Croissant">
+            </div>
+        </div>
+    </section>
+
+    <!-- COFFEE & BREAKFAST SECTION -->
+    <section id="coffee" style="background-color: #0a0a0a;">
+        <div class="section-header fade-up">
+            <h3>Coffee & Breakfast.</h3>
+            <p>The perfect pair for your morning bread.</p>
+        </div>
+
+        <div class="grid-container">
+            <!-- Item 4 -->
+            <div class="card fade-up">
+                <div class="card-content">
+                    <h4>Single Origin</h4>
+                    <p>Ethically sourced roast.</p>
+                    <span class="price">$5.00</span>
+                    <button class="add-btn" onclick="addToCart('Single Origin Coffee', 5.00, 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2671')">Add to Bag</button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2671" class="card-image" alt="Coffee">
+            </div>
+
+            <!-- Item 5 -->
+            <div class="card fade-up">
+                <div class="card-content">
+                    <h4>Almond Croissant</h4>
+                    <p>Sweet frangipane filling.</p>
+                    <span class="price">$5.50</span>
+                    <button class="add-btn" onclick="addToCart('Almond Croissant', 5.50, 'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=2669')">Add to Bag</button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=2669" class="card-image" alt="Almond Croissant">
+            </div>
+
+            <!-- Item 6 -->
+            <div class="card fade-up">
+                <div class="card-content">
+                    <h4>Avo Toast</h4>
+                    <p>Sourdough base, chili flakes.</p>
+                    <span class="price">$12.00</span>
+                    <button class="add-btn" onclick="addToCart('Avocado Toast', 12.00, 'avocado_toast.png')">Add to Bag</button>
+                </div>
+                <img src="avocado_toast.png" class="card-image" alt="Avocado Toast">
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-section">
+        <div class="about-text fade-up">
+            <h3>Baked with Soul.</h3>
+            <p>At Crumb & Co., we believe that great bread takes time. We don't rush the fermentation process. Every loaf is made from a starter kept alive since 1998.</p>
+            <p>We source our flour locally and our coffee directly from farmers. When you walk through our doors, you aren't just buying food; you're supporting a community craft.</p>
+        </div>
+        <div class="about-image fade-up">
+            <img src="bakery_about.png" alt="Baker kneading dough">
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="section-header fade-up">
+            <h3>Visit Us.</h3>
+        </div>
+
+        <div class="contact-grid fade-up">
+            <div class="contact-info">
+                <div>
+                    <h4>Location</h4>
+                    <p>123 Artisan Avenue,<br>Brooklyn, NY 11201</p>
+                </div>
+                <div>
+                    <h4>Hours</h4>
+                    <p>Mon - Fri: 7am - 4pm<br>Sat - Sun: 8am - 5pm</p>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p>hello@crumbco.com<br>(555) 123-4567</p>
+                </div>
+            </div>
+            <div class="map-placeholder">
+                <!-- Using a static image for map to ensure it loads reliably without API key -->
+                <img src="brooklyn_map.png" style="width:100%; height:100%; object-fit:cover; opacity:1.0; border-radius:20px;" alt="Map">
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Copyright © 2023 Crumb & Co. All rights reserved.</p>
+        <p style="margin-top: 10px;">Privacy Policy | Terms of Use | Sales and Refunds</p>
+    </footer>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">Item added to bag</div>
+
+    <script>
+        // --- 1. STATE MANAGEMENT ---
+        let cart = [];
+
+        // --- 2. DOM ELEMENTS ---
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartCountEl = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const toastEl = document.getElementById('toast');
+
+        // --- 3. NAVIGATION SCROLL & ANIMATIONS ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // --- 4. CART FUNCTIONALITY ---
+        
+        // Toggle Drawer Open/Close
+        function toggleCart(e) {
+            if (e && e.target !== cartOverlay && e.target.closest('.cart-drawer')) {
+                return; // Don't close if clicking inside drawer
+            }
+            cartOverlay.classList.toggle('open');
+        }
+
+        // Add Item
+        function addToCart(name, price, imgUrl) {
+            cart.push({ name, price, imgUrl });
+            updateCartUI();
+            showToast(`Added ${name}`);
+            
+            // Automatically open cart to show feedback
+            cartOverlay.classList.add('open');
+        }
+
+        // Remove Item
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            // Update Count
+            cartCountEl.innerText = cart.length;
+            cartCountEl.style.display = cart.length > 0 ? 'inline-block' : 'none';
+
+            // Update List
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your bag is empty.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    const itemEl = document.createElement('div');
+                    itemEl.classList.add('cart-item');
+                    itemEl.innerHTML = `
+                        <img src="${item.imgUrl}" class="cart-item-img" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h5>${item.name}</h5>
+                            <p>$${item.price.toFixed(2)}</p>
+                        </div>
+                        <div style="margin-left:auto; display:flex; align-items:center;">
+                             <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#666; cursor:pointer; font-size:12px;">Remove</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemEl);
+                });
+            }
+
+            // Update Total
+            cartTotalEl.innerText = '$' + total.toFixed(2);
+        }
+
+        // Checkout Simulation
+        function checkout() {
+            if(cart.length === 0) {
+                alert("Your bag is empty!");
+                return;
+            }
+            alert("Thank you for your order! Your sourdough is being prepared.");
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // --- 5. MOBILE MENU ---
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // --- 6. TOAST NOTIFICATION ---
+        function showToast(message) {
+            toastEl.innerText = message;
+            toastEl.classList.add('show');
+            setTimeout(() => {
+                toastEl.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

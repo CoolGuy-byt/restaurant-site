@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us</title>
+  <style>
+    /* ============================================================
+       CSS — Contact Form Section
+       Design: premium dark luxury theme matching Noir & Gold
+       ============================================================ */
+
+    #contact-section {
+      --cf-bg: #0d0d0d;
+      --cf-card: #161616;
+      --cf-border: #2a2a2a;
+      --cf-border-focus: #C9A84C;
+      --cf-error: #e74c3c;
+      --cf-error-bg: rgba(231, 76, 60, 0.08);
+      --cf-success: #C9A84C;
+      --cf-success-bg: rgba(201, 168, 76, 0.1);
+      --cf-text: #ffffff;
+      --cf-text-muted: #777777;
+      --cf-input-bg: #1a1a1a;
+      --cf-btn: #C9A84C;
+      --cf-btn-hover: #E5C565;
+      --cf-btn-disabled: #3d3d3d;
+      --cf-radius: 8px;
+      --cf-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--cf-text);
+      background: var(--cf-bg);
+      padding: 5rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    #contact-section * {
+      box-sizing: border-box;
+    }
+
+    /* --- Card --- */
+    .cf-card {
+      background: var(--cf-card);
+      border: 1px solid var(--cf-border);
+      border-radius: var(--cf-radius);
+      box-shadow: var(--cf-shadow);
+      width: 100%;
+      max-width: 560px;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle gold accent line at top */
+    .cf-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--cf-btn), transparent);
+    }
+
+    /* --- Headings --- */
+    .cf-card__title {
+      margin: 0 0 0.35rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.85rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--cf-text);
+    }
+
+    .cf-card__subtitle {
+      margin: 0 0 2.25rem;
+      font-size: 0.92rem;
+      color: var(--cf-text-muted);
+      line-height: 1.6;
+    }
+
+    /* --- Form Group --- */
+    .cf-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .cf-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--cf-text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .cf-group label .cf-required {
+      color: var(--cf-error);
+      margin-left: 2px;
+    }
+
+    /* --- Inputs --- */
+    .cf-input,
+    .cf-textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--cf-text);
+      background: var(--cf-input-bg);
+      border: 1px solid var(--cf-border);
+      border-radius: var(--cf-radius);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      outline: none;
+    }
+
+    .cf-input::placeholder,
+    .cf-textarea::placeholder {
+      color: var(--cf-text-muted);
+    }
+
+    .cf-input:focus,
+    .cf-textarea:focus {
+      border-color: var(--cf-border-focus);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+      background: #1e1e1e;
+    }
+
+    .cf-textarea {
+      resize: vertical;
+      min-height: 150px;
+      line-height: 1.5;
+    }
+
+    /* --- Character Counter --- */
+    .cf-counter {
+      text-align: right;
+      font-size: 0.75rem;
+      color: var(--cf-text-muted);
+      margin-top: 0.35rem;
+      transition: color 0.2s;
+      user-select: none;
+    }
+
+    .cf-counter--warn {
+      color: #d48806;
+    }
+
+    .cf-counter--over {
+      color: var(--cf-error);
+      font-weight: 600;
+    }
+
+    /* --- Inline Error Message --- */
+    .cf-error {
+      display: none;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--cf-error);
+      line-height: 1.4;
+    }
+
+    .cf-error--visible {
+      display: block;
+    }
+
+    .cf-group--error .cf-input,
+    .cf-group--error .cf-textarea {
+      border-color: var(--cf-error);
+      background: var(--cf-error-bg);
+    }
+
+    .cf-group--error .cf-input:focus,
+    .cf-group--error .cf-textarea:focus {
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+    }
+
+    /* --- Submit Button --- */
+    .cf-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.9rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0d0d0d;
+      background: var(--cf-btn);
+      border: 2px solid var(--cf-btn);
+      border-radius: var(--cf-radius);
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    }
+
+    .cf-submit:hover:not(:disabled) {
+      background: var(--cf-btn-hover);
+      border-color: var(--cf-btn-hover);
+      box-shadow: 0 4px 14px rgba(201, 168, 76, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .cf-submit:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .cf-submit:disabled {
+      background: var(--cf-btn-disabled);
+      border-color: var(--cf-btn-disabled);
+      color: var(--cf-text-muted);
+      cursor: not-allowed;
+      opacity: 0.75;
+    }
+
+    /* --- Spinner --- */
+    .cf-spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2.5px solid rgba(13, 13, 13, 0.25);
+      border-top-color: #0d0d0d;
+      border-radius: 50%;
+      animation: cf-spin 0.6s linear infinite;
+    }
+
+    .cf-submit--loading .cf-spinner {
+      display: inline-block;
+    }
+
+    @keyframes cf-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* --- Status Messages --- */
+    .cf-status {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-radius: var(--cf-radius);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: none;
+    }
+
+    .cf-status--visible {
+      display: block;
+    }
+
+    .cf-status--success {
+      background: var(--cf-success-bg);
+      color: var(--cf-success);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+    }
+
+    .cf-status--error {
+      background: var(--cf-error-bg);
+      color: var(--cf-error);
+      border: 1px solid rgba(231, 76, 60, 0.15);
+    }
+
+    .cf-status__retry {
+      display: inline-block;
+      margin-left: 0.5rem;
+      color: inherit;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: inherit;
+      font-family: inherit;
+      padding: 0;
+    }
+
+    .cf-status__retry:hover {
+      text-decoration: none;
+    }
+
+    /* --- Success View --- */
+    .cf-success-view {
+      text-align: center;
+      display: none;
+    }
+
+    .cf-success-view--visible {
+      display: block;
+    }
+
+    .cf-success-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1.25rem;
+      background: var(--cf-success-bg);
+      border: 2px solid var(--cf-success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cf-success-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--cf-success);
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    .cf-success-view__title {
+      margin: 0 0 0.5rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: var(--cf-success);
+      letter-spacing: 0.03em;
+    }
+
+    .cf-success-view__msg {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--cf-text-muted);
+      line-height: 1.6;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 480px) {
+      #contact-section {
+        padding: 2rem 1rem;
+      }
+
+      .cf-card {
+        padding: 2rem 1.25rem 1.75rem;
+      }
+
+      .cf-card__title {
+        font-size: 1.55rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section id="contact-section" aria-label="Contact us">
+  <div class="cf-card">
+
+    <h2 class="cf-card__title">Get in Touch</h2>
+    <p class="cf-card__subtitle">
+      Have a question or want to work together? Send us a message and we'll get back to you soon.
+    </p>
+
+    <form id="cf-form" novalidate autocomplete="on" aria-describedby="cf-status">
+      <div class="cf-group" id="cf-group-name">
+        <label for="cf-name">Name<span class="cf-required" aria-hidden="true">*</span></label>
+        <input type="text" id="cf-name" name="name" class="cf-input" placeholder="Your full name" required aria-required="true" autocomplete="name" />
+        <p class="cf-error" id="cf-error-name" role="alert" aria-live="polite"></p>
+      </div>
+
+      <div class="cf-group" id="cf-group-email">
+        <label for="cf-email">Email<span class="cf-required" aria-hidden="true">*</span></label>
+        <input type="email" id="cf-email" name="email" class="cf-input" placeholder="you@example.com" required aria-required="true" autocomplete="email" />
+        <p class="cf-error" id="cf-error-email" role="alert" aria-live="polite"></p>
+      </div>
+
+      <div class="cf-group" id="cf-group-message">
+        <label for="cf-message">Message<span class="cf-required" aria-hidden="true">*</span></label>
+        <textarea id="cf-message" name="message" class="cf-textarea" placeholder="Tell us what you need…" required aria-required="true" minlength="10" maxlength="1000"></textarea>
+        <p class="cf-counter" id="cf-counter" aria-live="polite">0 / 1000</p>
+        <p class="cf-error" id="cf-error-message" role="alert" aria-live="polite"></p>
+      </div>
+
+      <button type="submit" class="cf-submit" id="cf-submit">
+        <span class="cf-spinner" aria-hidden="true"></span>
+        <span class="cf-submit__text">Send Message</span>
+      </button>
+    </form>
+
+    <div class="cf-status" id="cf-status" role="status" aria-live="assertive"></div>
+
+    <div class="cf-success-view" id="cf-success-view">
+      <div class="cf-success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg>
+      </div>
+      <h3 class="cf-success-view__title">Message Sent!</h3>
+      <p class="cf-success-view__msg">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  "use strict";
+  var WEBHOOK_URL = "REPLACE_WITH_CONTACT_WEBHOOK_URL";
+  var MSG_MIN = 10;
+  var MSG_MAX = 1000;
+  var form = document.getElementById("cf-form");
+  var nameInput = document.getElementById("cf-name");
+  var emailInput = document.getElementById("cf-email");
+  var messageInput = document.getElementById("cf-message");
+  var counterEl = document.getElementById("cf-counter");
+  var submitBtn = document.getElementById("cf-submit");
+  var statusEl = document.getElementById("cf-status");
+  var successView = document.getElementById("cf-success-view");
+  var cardTitle = form ? form.querySelector(".cf-card__title") : null;
+  var cardSub = form ? form.querySelector(".cf-card__subtitle") : null;
+  var EMAIL_RE = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+  function showError(groupId, errorId, msg) {
+    var group = document.getElementById(groupId);
+    var err = document.getElementById(errorId);
+    group.classList.add("cf-group--error");
+    err.textContent = msg;
+    err.classList.add("cf-error--visible");
+  }
+  function clearField(groupId, errorId) {
+    var group = document.getElementById(groupId);
+    var err = document.getElementById(errorId);
+    group.classList.remove("cf-group--error");
+    err.textContent = "";
+    err.classList.remove("cf-error--visible");
+  }
+  function clearAllErrors() {
+    [["cf-group-name", "cf-error-name"], ["cf-group-email", "cf-error-email"], ["cf-group-message", "cf-error-message"]].forEach(function (pair) {
+      clearField(pair[0], pair[1]);
+    });
+  }
+  function setStatus(type, html) {
+    statusEl.className = "cf-status cf-status--visible cf-status--" + type;
+    statusEl.innerHTML = html;
+  }
+  function clearStatus() {
+    statusEl.className = "cf-status";
+    statusEl.innerHTML = "";
+  }
+  function setSubmitting(loading) {
+    submitBtn.disabled = loading;
+    if (loading) submitBtn.classList.add("cf-submit--loading");
+    else submitBtn.classList.remove("cf-submit--loading");
+  }
+  function showSuccess() {
+    form.style.display = "none";
+    if (cardTitle) cardTitle.style.display = "none";
+    if (cardSub) cardSub.style.display = "none";
+    successView.classList.add("cf-success-view--visible");
+  }
+
+  messageInput.addEventListener("input", function () {
+    var len = messageInput.value.length;
+    counterEl.textContent = len + " / " + MSG_MAX;
+    counterEl.classList.remove("cf-counter--warn", "cf-counter--over");
+    if (len >= MSG_MAX) counterEl.classList.add("cf-counter--over");
+    else if (len >= MSG_MAX * 0.85) counterEl.classList.add("cf-counter--warn");
+    if (messageInput.value.trim().length >= MSG_MIN) clearField("cf-group-message", "cf-error-message");
+  });
+
+  function validate() {
+    var valid = true;
+    var firstInvalid = null;
+    var trimmedName = nameInput.value.trim();
+    var trimmedEmail = emailInput.value.trim();
+    var trimmedMsg = messageInput.value.trim();
+    if (!trimmedName) { showError("cf-group-name", "cf-error-name", "Please enter your name."); if (!firstInvalid) firstInvalid = nameInput; valid = false; }
+    else clearField("cf-group-name", "cf-error-name");
+    if (!trimmedEmail) { showError("cf-group-email", "cf-error-email", "Please enter your email address."); if (!firstInvalid) firstInvalid = emailInput; valid = false; }
+    else if (!EMAIL_RE.test(trimmedEmail)) { showError("cf-group-email", "cf-error-email", "Please enter a valid email address."); if (!firstInvalid) firstInvalid = emailInput; valid = false; }
+    else clearField("cf-group-email", "cf-error-email");
+    if (!trimmedMsg) { showError("cf-group-message", "cf-error-message", "Please enter a message."); if (!firstInvalid) firstInvalid = messageInput; valid = false; }
+    else if (trimmedMsg.length < MSG_MIN) { showError("cf-group-message", "cf-error-message", "Message must be at least " + MSG_MIN + " characters (currently " + trimmedMsg.length + ")."); if (!firstInvalid) firstInvalid = messageInput; valid = false; }
+    else if (trimmedMsg.length > MSG_MAX) { showError("cf-group-message", "cf-error-message", "Message must not exceed " + MSG_MAX + " characters."); if (!firstInvalid) firstInvalid = messageInput; valid = false; }
+    else clearField("cf-group-message", "cf-error-message");
+    if (!valid && firstInvalid) firstInvalid.focus();
+    return valid;
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    clearStatus();
+    if (!validate()) return;
+    var payload = { name: nameInput.value.trim(), email: emailInput.value.trim(), message: messageInput.value.trim() };
+    setSubmitting(true);
+    fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+      .then(function (res) { if (!res.ok) throw new Error("Server returned " + res.status); return res; })
+      .then(function () { showSuccess(); })
+      .catch(function (err) {
+        setSubmitting(false);
+        setStatus("error", "We couldn't send your message. " + (err && err.message ? err.message + ". " : "") + "Please check your connection and try again. " + '<button class="cf-status__retry" type="button">Retry</button>');
+        var retryBtn = statusEl.querySelector(".cf-status__retry");
+        if (retryBtn) retryBtn.addEventListener("click", function () { clearStatus(); form.dispatchEvent(new Event("submit")); });
+      });
+  });
+})();
+</script>
+</body>
+</html>

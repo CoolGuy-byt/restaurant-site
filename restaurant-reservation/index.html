@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Reservation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<section id="reservation-section" class="reservation-section" aria-labelledby="reservation-heading">
+  <div class="reservation-container">
+    <h2 id="reservation-heading" class="reservation-heading">Reserve a Table</h2>
+    <p class="reservation-subtitle">Book your dining experience with us</p>
+
+    <form id="reservation-form" class="reservation-form" novalidate>
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="res-name" class="form-label">Full Name</label>
+        <input
+          type="text"
+          id="res-name"
+          name="name"
+          class="form-input"
+          placeholder="Jane Doe"
+          required
+          autocomplete="name"
+          aria-describedby="name-error"
+        >
+        <span id="name-error" class="form-error" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="res-email" class="form-label">Email Address</label>
+        <input
+          type="email"
+          id="res-email"
+          name="email"
+          class="form-input"
+          placeholder="jane@example.com"
+          required
+          autocomplete="email"
+          aria-describedby="email-error"
+        >
+        <span id="email-error" class="form-error" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+        <label for="res-date" class="form-label">Date</label>
+        <input
+          type="date"
+          id="res-date"
+          name="date"
+          class="form-input"
+          required
+          aria-describedby="date-error"
+        >
+        <span id="date-error" class="form-error" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Time -->
+      <div class="form-group">
+        <label for="res-time" class="form-label">Time</label>
+        <input
+          type="time"
+          id="res-time"
+          name="time"
+          class="form-input"
+          required
+          aria-describedby="time-error"
+        >
+        <span id="time-error" class="form-error" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Number of Guests -->
+      <div class="form-group">
+        <label for="res-guests" class="form-label">Number of Guests</label>
+        <input
+          type="number"
+          id="res-guests"
+          name="guests"
+          class="form-input"
+          min="1"
+          max="20"
+          value="2"
+          required
+          aria-describedby="guests-error"
+        >
+        <span id="guests-error" class="form-error" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" id="res-submit-btn" class="submit-btn">
+        <span class="btn-text">Book Now</span>
+        <span class="btn-loading" hidden>Booking…</span>
+      </button>
+    </form>
+
+    <!-- Success Message (hidden by default, uses aria-live region) -->
+    <div id="reservation-success" class="reservation-success" role="status" aria-live="polite" hidden>
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h3 class="success-title">Reservation Confirmed!</h3>
+      <p class="success-message">
+        Thank you, <strong id="success-name"></strong>. Your table for <strong id="success-guests"></strong> on <strong id="success-date-time"></strong> has been booked.
+      </p>
+      <p class="success-confirmation">
+        A confirmation email will be sent to <strong id="success-email"></strong>.
+      </p>
+      <button type="button" id="res-reset-btn" class="reset-btn">Make Another Reservation</button>
+    </div>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

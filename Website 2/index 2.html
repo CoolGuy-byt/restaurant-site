@@ -1,0 +1,842 @@
+< !DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description"
+content="Premium web design and development agency for high-growth brands. We build high-performance, conversion-optimised websites that turn visitors into clients."><meta name="robots" content="index, follow"><title>Fiverr-Ai | Premium Web Design &amp;
+Development Agency</title><meta property="og:type" content="website"><meta property="og:title" content="Fiverr-Ai | Premium Web Design Agency"><meta property="og:description"
+content="We build digital empires that convert. Premium web design for high-growth brands."><meta property="og:image"
+content="https://picsum.photos/seed/og-fiverrai/1200/630.jpg"><meta property="og:url" content="https://yourwebsite.com"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Fiverr-Ai | Premium Web Design Agency"><meta name="twitter:description"
+content="We build digital empires that convert. Premium web design for high-growth brands."><meta name="twitter:image"
+
+content="https://picsum.photos/seed/og-fiverrai/1200/630.jpg"><script src="https://cdn.tailwindcss.com"></script><script>tailwind.config= {
+    theme: {
+        extend: {
+            colors: {
+                'base': '#080c14',
+                    'surface': '#0f172a',
+                    'card': '#151f32',
+                    'card-hover': '#1a2740',
+                    'border': '#1e2d47',
+                    'border-hover': '#2a3f66',
+                    'fg': '#e8edf5',
+                    'fg-muted': '#8494ad',
+                    'accent': '#0ea5e9',
+                    'accent-hover': '#38bdf8',
+                    'accent-soft': 'rgba(14,165,233,0.12)',
+                    'purple': '#8b5cf6',
+                    'purple-soft': 'rgba(139,92,246,0.12)',
+                    'pink': '#ec4899',
+                    'pink-soft': 'rgba(236,72,153,0.12)',
+            }
+
+            ,
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                    mono: ['JetBrains Mono', 'monospace'],
+            }
+
+            ,
+            boxShadow: {
+                'glow': '0 0 20px rgba(14,165,233,0.15)',
+                    'glow-lg': '0 0 40px rgba(14,165,233,0.2)',
+                    'glow-purple': '0 0 20px rgba(139,92,246,0.15)',
+                    'card': '0 4px 24px rgba(0,0,0,0.3)',
+                    'card-hover': '0 8px 40px rgba(0,0,0,0.4)',
+            }
+
+            ,
+        }
+    }
+}
+
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+
+rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><style> :root {
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #080c14;
+    color: #e8edf5;
+    overflow-x: hidden;
+}
+
+/* Subtle background texture */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(14, 165, 233, 0.07), transparent),
+        radial-gradient(ellipse 60% 50% at 85% 20%, rgba(139, 92, 246, 0.06), transparent),
+        radial-gradient(ellipse 50% 40% at 50% 90%, rgba(236, 72, 153, 0.04), transparent);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body>* {
+    position: relative;
+    z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: -0.025em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080c14;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e2d47;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0ea5e9;
+}
+
+/* Focus */
+:focus-visible {
+    outline: 2px solid #0ea5e9;
+    outline-offset: 2px;
+}
+
+/* Glass header */
+.glass-header {
+    background: rgba(8, 12, 20, 0.75);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid rgba(30, 45, 71, 0.5);
+}
+
+.glass-header.scrolled {
+    background: rgba(8, 12, 20, 0.92);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient text */
+.text-gradient {
+    background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+    background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Reveal animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 {
+    transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+    transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+    transition-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+    transition-delay: 0.4s;
+}
+
+.reveal-delay-5 {
+    transition-delay: 0.5s;
+}
+
+/* Card styles */
+.service-card {
+    background: linear-gradient(160deg, rgba(21, 31, 50, 0.9), rgba(15, 23, 42, 0.9));
+    border: 1px solid #1e2d47;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover {
+    border-color: #2a3f66;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Portfolio filter */
+.portfolio-item {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.portfolio-item.is-hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    position: absolute;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+}
+
+.filter-btn {
+    transition: all 0.25s ease;
+}
+
+.filter-btn.active {
+    background: #0ea5e9;
+    color: white;
+    border-color: #0ea5e9;
+    box-shadow: 0 0 16px rgba(14, 165, 233, 0.3);
+}
+
+/* Testimonial track */
+.testimonial-track {
+    will-change: transform;
+}
+
+/* Floating badge animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.float-badge {
+    animation: float 4s ease-in-out infinite;
+}
+
+.float-badge-delayed {
+    animation: float 4s ease-in-out 1s infinite;
+}
+
+/* Form input */
+.form-input {
+    background: #0a1020;
+    border: 1px solid #1e2d47;
+    transition: all 0.25s ease;
+}
+
+.form-input:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: #4a5e7a;
+}
+
+/* Mobile menu */
+.mobile-menu {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-link {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s ease;
+}
+
+.mobile-menu.is-open .mobile-menu-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(4) {
+    transition-delay: 0.25s;
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(5) {
+    transition-delay: 0.3s;
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(6) {
+    transition-delay: 0.35s;
+}
+
+/* Back to top */
+.back-to-top {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Active nav */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #0ea5e9;
+    transition: all 0.25s ease;
+    transform: translateX(-50%);
+    border-radius: 1px;
+}
+
+.nav-link.active {
+    color: #0ea5e9 !important;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Stats counter */
+.stat-divider {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, #1e2d47, transparent);
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 9999;
+    transform: translateY(120%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+}
+
+.toast-error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Select arrow fix for dark bg */
+select option {
+    background: #0a1020;
+    color: #e8edf5;
+}
+
+</style></head><body id="top" class="antialiased">< !--=====MOBILE MENU=====--><div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-base/95 backdrop-blur-2xl flex flex-col items-center justify-center" role="dialog" aria-label="Mobile menu" aria-hidden="true"><button id="mobile-menu-close" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-fg-muted hover:text-accent transition-colors" aria-label="Close menu"><i class="fas fa-times text-xl"></i></button><nav class="flex flex-col items-center gap-7 text-2xl font-semibold" aria-label="Mobile Navigation"><a href="#hero" class="mobile-menu-link text-fg hover:text-accent transition-colors">Home</a><a href="#services" class="mobile-menu-link text-fg hover:text-accent transition-colors">Services</a><a href="#portfolio" class="mobile-menu-link text-fg hover:text-accent transition-colors">Portfolio</a><a href="#testimonials" class="mobile-menu-link text-fg hover:text-accent transition-colors">Reviews</a><a href="#contact" class="mobile-menu-link text-fg hover:text-accent transition-colors">Contact</a><a href="#contact" class="mobile-menu-link mt-4 inline-block px-8 py-3 bg-accent text-white font-bold rounded-xl shadow-glow hover:bg-accent-hover transition-all text-lg">Start Project</a></nav></div>< !--=====HEADER=====--><header id="site-header" class="glass-header fixed w-full top-0 left-0 z-50 transition-all duration-300" role="banner"><div class="max-w-7xl mx-auto px-6 h-[72px] flex items-center justify-between"><a href="#top" class="flex items-center gap-2.5 group" aria-label="Fiverr-Ai Home"><div class="w-9 h-9 bg-gradient-to-br from-accent to-purple rounded-lg flex items-center justify-center text-white font-extrabold text-sm shadow-glow group-hover:shadow-glow-lg transition-shadow">F</div><span class="text-xl font-bold tracking-tight text-fg">Fiverr<span class="text-accent">-Ai</span></span></a><nav class="hidden lg:flex items-center gap-7" aria-label="Main Navigation"><a href="#hero" class="nav-link text-sm font-medium text-fg-muted hover:text-fg transition-colors active">Home</a><a href="#services" class="nav-link text-sm font-medium text-fg-muted hover:text-fg transition-colors">Services</a><a href="#portfolio" class="nav-link text-sm font-medium text-fg-muted hover:text-fg transition-colors">Portfolio</a><a href="#testimonials" class="nav-link text-sm font-medium text-fg-muted hover:text-fg transition-colors">Reviews</a></nav><div class="flex items-center gap-3"><a href="#contact" class="hidden lg:inline-flex px-5 py-2.5 bg-accent text-white text-sm font-semibold rounded-xl shadow-glow hover:bg-accent-hover hover:shadow-glow-lg transition-all duration-300 hover:-translate-y-0.5">Let's Talk</a>
+ <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center text-fg-muted hover:text-fg rounded-lg hover:bg-card transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><i class="fas fa-bars text-lg"></i></button></div></div></header><main>< !--=====HERO=====--><section id="hero" class="relative min-h-screen flex items-center pt-[72px] overflow-hidden">< !-- Ambient light blobs --><div class="absolute top-0 right-[10%] w-[500px] h-[500px] bg-accent/[0.06] rounded-full blur-[140px] pointer-events-none"></div><div class="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] bg-purple/[0.06] rounded-full blur-[120px] pointer-events-none"></div><div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center relative z-10"><div><div class="reveal inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-accent-soft border border-accent/20 mb-8"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span class="text-xs font-mono text-fg-muted">Available for New Projects</span></div><h1 class="reveal reveal-delay-1 text-[clamp(2.75rem,6vw,4.5rem)] font-extrabold leading-[1.08] mb-6">We Build<br><span class="text-gradient">Digital Empires</span><br>That Convert. </h1><p class="reveal reveal-delay-2 text-lg text-fg-muted mb-10 max-w-lg leading-relaxed">Premium web design and development for high-ticket clients. We turn your vision into a sleek,
+high-performance digital presence that drives revenue. </p><div class="reveal reveal-delay-3 flex flex-col sm:flex-row gap-4"><a href="#contact" class="inline-flex items-center justify-center px-8 py-4 bg-accent text-white font-bold rounded-xl shadow-glow hover:bg-accent-hover hover:shadow-glow-lg transition-all duration-300 hover:-translate-y-1">Start Your Project <i class="fas fa-arrow-right ml-2.5 text-sm"></i></a><a href="#portfolio" class="inline-flex items-center justify-center px-8 py-4 bg-card border border-border text-fg font-bold rounded-xl hover:border-border-hover hover:bg-card-hover transition-all duration-300">View Our Work </a></div><div class="reveal reveal-delay-4 mt-12 flex items-center gap-5"><div class="flex -space-x-2.5"><img src="https://picsum.photos/seed/client-a/64/64.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-base object-cover"><img src="https://picsum.photos/seed/client-b/64/64.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-base object-cover"><img src="https://picsum.photos/seed/client-c/64/64.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-base object-cover"><img src="https://picsum.photos/seed/client-d/64/64.jpg" alt="Client" class="w-10 h-10 rounded-full border-2 border-base object-cover"></div><div><span class="block font-bold text-fg text-sm">50+Happy Clients</span><div class="flex text-amber-400 text-xs gap-0.5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div></div><div class="reveal reveal-delay-2 relative hidden lg:block"><div class="relative z-10 rounded-2xl overflow-hidden shadow-card-hover border border-border/50 transform rotate-2 hover:rotate-0 transition-transform duration-700"><img src="https://picsum.photos/seed/dashboard-hero/800/540.jpg" alt="Dashboard UI Design" class="w-full h-auto object-cover"></div>< !-- Floating badges --><div class="float-badge absolute -left-6 top-1/4 z-20 bg-card/90 backdrop-blur-md border border-border p-3.5 rounded-xl shadow-card"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center text-emerald-400"><i class="fas fa-chart-line text-sm"></i></div><div><p class="text-[11px] text-fg-muted">Conversion Rate</p><p class="font-bold text-fg text-sm">+127%</p></div></div></div><div class="float-badge-delayed absolute -right-4 bottom-1/4 z-20 bg-card/90 backdrop-blur-md border border-border p-3.5 rounded-xl shadow-card"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-purple-soft flex items-center justify-center text-purple"><i class="fas fa-code text-sm"></i></div><div><p class="text-[11px] text-fg-muted">Code Quality</p><p class="font-bold text-fg text-sm">100% Clean</p></div></div></div>< !-- Glow behind image --><div class="absolute -inset-8 bg-gradient-to-r from-accent/10 via-purple/10 to-pink/10 blur-3xl -z-10"></div></div></div></section>< !--=====STATS BAR=====--><section class="relative py-16 bg-surface/50 border-y border-border/50"><div class="max-w-6xl mx-auto px-6 flex flex-wrap items-center justify-center gap-8 md:gap-0 md:justify-between"><div class="reveal text-center px-6"><p class="text-3xl md:text-4xl font-extrabold text-fg" data-count="150">0</p><p class="text-sm text-fg-muted mt-1">Projects Delivered</p></div><div class="stat-divider hidden md:block"></div><div class="reveal reveal-delay-1 text-center px-6"><p class="text-3xl md:text-4xl font-extrabold text-fg" data-count="50">0</p><p class="text-sm text-fg-muted mt-1">Happy Clients</p></div><div class="stat-divider hidden md:block"></div><div class="reveal reveal-delay-2 text-center px-6"><p class="text-3xl md:text-4xl font-extrabold text-fg" data-count="98">0</p><p class="text-sm text-fg-muted mt-1">Client Satisfaction %</p></div><div class="stat-divider hidden md:block"></div><div class="reveal reveal-delay-3 text-center px-6"><p class="text-3xl md:text-4xl font-extrabold text-fg" data-count="5">0</p><p class="text-sm text-fg-muted mt-1">Years of Experience</p></div></div></section>< !--=====SERVICES=====--><section id="services" class="py-24 md:py-32 relative"><div class="max-w-7xl mx-auto px-6"><div class="max-w-2xl mb-16 reveal"><span class="text-accent font-mono text-sm tracking-wider uppercase mb-3 block">Our Expertise</span><h2 class="text-3xl md:text-5xl font-extrabold mb-5 leading-tight">Premium Services for<br><span class="text-gradient">High-Growth Brands</span></h2><p class="text-fg-muted text-lg leading-relaxed">We engineer digital experiences designed to convert visitors into high-value clients.</p></div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="reveal service-card p-7 rounded-2xl group relative overflow-hidden"><div class="w-12 h-12 bg-accent-soft rounded-xl flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors"><i class="fas fa-pen-nib text-lg text-accent"></i></div><h3 class="text-lg font-bold mb-2.5 text-fg">Custom Web Design</h3><p class="text-fg-muted text-sm leading-relaxed mb-5">Bespoke,
+pixel-perfect designs tailored to your brand identity and market position.</p><a href="#contact" class="inline-flex items-center text-accent text-sm font-semibold hover:text-accent-hover transition-colors group/link">Learn More <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover/link:translate-x-1"></i></a></div><div class="reveal reveal-delay-1 service-card p-7 rounded-2xl group relative overflow-hidden"><div class="w-12 h-12 bg-purple-soft rounded-xl flex items-center justify-center mb-5 group-hover:bg-purple/20 transition-colors"><i class="fas fa-code text-lg text-purple"></i></div><h3 class="text-lg font-bold mb-2.5 text-fg">Full-Stack Development</h3><p class="text-fg-muted text-sm leading-relaxed mb-5">Scalable frontend and backend solutions from React and Next.js to Node.js.</p><a href="#contact" class="inline-flex items-center text-purple text-sm font-semibold hover:text-purple/80 transition-colors group/link">Learn More <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover/link:translate-x-1"></i></a></div><div class="reveal reveal-delay-2 service-card p-7 rounded-2xl group relative overflow-hidden"><div class="w-12 h-12 bg-pink-soft rounded-xl flex items-center justify-center mb-5 group-hover:bg-pink/20 transition-colors"><i class="fas fa-shopping-cart text-lg text-pink"></i></div><h3 class="text-lg font-bold mb-2.5 text-fg">E-Commerce Stores</h3><p class="text-fg-muted text-sm leading-relaxed mb-5">High-converting Shopify and WooCommerce stores optimized for maximum sales.</p><a href="#contact" class="inline-flex items-center text-pink text-sm font-semibold hover:text-pink/80 transition-colors group/link">Learn More <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover/link:translate-x-1"></i></a></div><div class="reveal service-card p-7 rounded-2xl group relative overflow-hidden"><div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-amber-500/20 transition-colors"><i class="fas fa-layer-group text-lg text-amber-400"></i></div><h3 class="text-lg font-bold mb-2.5 text-fg">UI/UX Optimization</h3><p class="text-fg-muted text-sm leading-relaxed mb-5">Data-driven improvements to increase retention and reduce bounce rates significantly.</p><a href="#contact" class="inline-flex items-center text-amber-400 text-sm font-semibold hover:text-amber-300 transition-colors group/link">Learn More <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover/link:translate-x-1"></i></a></div><div class="reveal reveal-delay-1 service-card p-7 rounded-2xl group relative overflow-hidden"><div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-emerald-500/20 transition-colors"><i class="fas fa-rocket text-lg text-emerald-400"></i></div><h3 class="text-lg font-bold mb-2.5 text-fg">SEO & Performance</h3><p class="text-fg-muted text-sm leading-relaxed mb-5">Lightning-fast load speeds and search optimization for higher organic visibility.</p><a href="#contact" class="inline-flex items-center text-emerald-400 text-sm font-semibold hover:text-emerald-300 transition-colors group/link">Learn More <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover/link:translate-x-1"></i></a></div><div class="reveal reveal-delay-2 service-card p-7 rounded-2xl group relative overflow-hidden"><div class="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-cyan-500/20 transition-colors"><i class="fas fa-shield-halved text-lg text-cyan-400"></i></div><h3 class="text-lg font-bold mb-2.5 text-fg">Maintenance & Support</h3><p class="text-fg-muted text-sm leading-relaxed mb-5">Ongoing technical support,
+security updates,
+and content management services.</p><a href="#contact" class="inline-flex items-center text-cyan-400 text-sm font-semibold hover:text-cyan-300 transition-colors group/link">Learn More <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover/link:translate-x-1"></i></a></div></div></div></section>< !--=====PORTFOLIO=====--><section id="portfolio" class="py-24 md:py-32 bg-surface/40 border-y border-border/30"><div class="max-w-7xl mx-auto px-6"><div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"><div class="reveal"><span class="text-accent font-mono text-sm tracking-wider uppercase mb-3 block">Selected Works</span><h2 class="text-3xl md:text-5xl font-extrabold leading-tight">Featured <span class="text-gradient">Projects</span></h2></div><div class="reveal reveal-delay-1 flex flex-wrap gap-2" role="group" aria-label="Filter projects"><button class="filter-btn active px-4 py-2 rounded-lg bg-card border border-border text-fg-muted text-sm font-semibold" data-filter="all">All</button><button class="filter-btn px-4 py-2 rounded-lg bg-card border border-border text-fg-muted text-sm font-semibold hover:border-border-hover" data-filter="web-design">Web Design</button><button class="filter-btn px-4 py-2 rounded-lg bg-card border border-border text-fg-muted text-sm font-semibold hover:border-border-hover" data-filter="development">Development</button><button class="filter-btn px-4 py-2 rounded-lg bg-card border border-border text-fg-muted text-sm font-semibold hover:border-border-hover" data-filter="e-commerce">E-Commerce</button></div></div><div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative"><div class="reveal portfolio-item group relative overflow-hidden rounded-2xl cursor-pointer" data-category="web-design"><img src="https://picsum.photos/seed/fintech-dash/800/540.jpg" alt="Fintech Dashboard" loading="lazy" width="800" height="540" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-base via-base/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"><span class="text-accent text-xs font-mono mb-1.5">Fintech / UI Design</span><h3 class="text-lg font-bold text-fg mb-1">Nova Finance Dashboard</h3><p class="text-fg-muted text-sm mb-4 line-clamp-2">A crypto trading interface focused on data visualization and real-time analytics.</p><span class="inline-flex items-center text-accent font-semibold text-sm">View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i></span></div></div><div class="reveal reveal-delay-1 portfolio-item group relative overflow-hidden rounded-2xl cursor-pointer" data-category="e-commerce"><img src="https://picsum.photos/seed/fashion-store/800/540.jpg" alt="Luxury Fashion Store" loading="lazy" width="800" height="540" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-base via-base/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"><span class="text-purple text-xs font-mono mb-1.5">E-Commerce / Shopify</span><h3 class="text-lg font-bold text-fg mb-1">Velvet & Vine Fashion</h3><p class="text-fg-muted text-sm mb-4 line-clamp-2">High-end e-commerce with custom product configurators and AR try-on.</p><span class="inline-flex items-center text-purple font-semibold text-sm">View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i></span></div></div><div class="reveal reveal-delay-2 portfolio-item group relative overflow-hidden rounded-2xl cursor-pointer" data-category="web-design"><img src="https://picsum.photos/seed/saas-landing/800/540.jpg" alt="SaaS Landing Page" loading="lazy" width="800" height="540" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-base via-base/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"><span class="text-pink text-xs font-mono mb-1.5">SaaS / Marketing</span><h3 class="text-lg font-bold text-fg mb-1">CloudSync Solutions</h3><p class="text-fg-muted text-sm mb-4 line-clamp-2">Conversion-optimized landing page for a B2B cloud provider.</p><span class="inline-flex items-center text-pink font-semibold text-sm">View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i></span></div></div><div class="reveal portfolio-item group relative overflow-hidden rounded-2xl cursor-pointer" data-category="development"><img src="https://picsum.photos/seed/real-estate-web/800/540.jpg" alt="Real Estate Platform" loading="lazy" width="800" height="540" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-base via-base/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"><span class="text-amber-400 text-xs font-mono mb-1.5">Real Estate / Web App</span><h3 class="text-lg font-bold text-fg mb-1">Urban Nest Properties</h3><p class="text-fg-muted text-sm mb-4 line-clamp-2">Property listings with map integration and virtual 3D tours.</p><span class="inline-flex items-center text-amber-400 font-semibold text-sm">View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i></span></div></div><div class="reveal reveal-delay-1 portfolio-item group relative overflow-hidden rounded-2xl cursor-pointer" data-category="web-design"><img src="https://picsum.photos/seed/creative-agency/800/540.jpg" alt="Creative Agency Site" loading="lazy" width="800" height="540" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-base via-base/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"><span class="text-cyan-400 text-xs font-mono mb-1.5">Creative / Branding</span><h3 class="text-lg font-bold text-fg mb-1">Apex Creative Agency</h3><p class="text-fg-muted text-sm mb-4 line-clamp-2">Bold,
+animation-heavy portfolio site for a marketing agency.</p><span class="inline-flex items-center text-cyan-400 font-semibold text-sm">View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i></span></div></div><div class="reveal reveal-delay-2 portfolio-item group relative overflow-hidden rounded-2xl cursor-pointer" data-category="development"><img src="https://picsum.photos/seed/health-app-ui/800/540.jpg" alt="Health App Interface" loading="lazy" width="800" height="540" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-base via-base/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"><span class="text-emerald-400 text-xs font-mono mb-1.5">Health / Mobile UI</span><h3 class="text-lg font-bold text-fg mb-1">Vitality Health Tracker</h3><p class="text-fg-muted text-sm mb-4 line-clamp-2">Mobile-first app for tracking fitness goals and nutrition plans.</p><span class="inline-flex items-center text-emerald-400 font-semibold text-sm">View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i></span></div></div></div></div></section>< !--=====TESTIMONIALS=====--><section id="testimonials" class="py-24 md:py-32 relative overflow-hidden"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple/[0.04] rounded-full blur-[140px] pointer-events-none"></div><div class="max-w-5xl mx-auto px-6 relative"><div class="text-center mb-16 reveal"><span class="text-accent font-mono text-sm tracking-wider uppercase mb-3 block">Testimonials</span><h2 class="text-3xl md:text-5xl font-extrabold mb-5">Client <span class="text-gradient">Success Stories</span></h2><p class="text-fg-muted text-lg max-w-2xl mx-auto">We build partnerships that drive revenue and brand authority.</p></div><div class="reveal reveal-delay-1"><div class="overflow-hidden rounded-2xl" id="testimonial-viewport"><div id="testimonial-track" class="testimonial-track flex"><div class="w-full flex-shrink-0 px-2"><div class="bg-card border border-border p-8 md:p-10 rounded-2xl relative hover:border-border-hover transition-colors"><div class="absolute top-6 right-8 text-accent/10"><i class="fas fa-quote-right text-5xl"></i></div><div class="flex flex-col md:flex-row gap-6 items-start"><img src="https://picsum.photos/seed/sarah-j/128/128.jpg" alt="Sarah Jenkins" loading="lazy" width="56" height="56" class="w-14 h-14 rounded-full object-cover border-2 border-accent/30 flex-shrink-0"><div><div class="flex text-amber-400 text-sm gap-0.5 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-fg/90 text-lg leading-relaxed mb-5">"The team transformed our digital presence and lifted conversions by 40% in the first month. Their attention to detail and strategic thinking set them apart." </p><h4 class="text-fg font-bold">Sarah Jenkins</h4><span class="text-accent text-sm font-medium">CTO,
+NeonFlow Systems</span></div></div></div></div><div class="w-full flex-shrink-0 px-2"><div class="bg-card border border-border p-8 md:p-10 rounded-2xl relative hover:border-border-hover transition-colors"><div class="absolute top-6 right-8 text-accent/10"><i class="fas fa-quote-right text-5xl"></i></div><div class="flex flex-col md:flex-row gap-6 items-start"><img src="https://picsum.photos/seed/marcus-t/128/128.jpg" alt="Marcus Thorne" loading="lazy" width="56" height="56" class="w-14 h-14 rounded-full object-cover border-2 border-purple/30 flex-shrink-0"><div><div class="flex text-amber-400 text-sm gap-0.5 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-fg/90 text-lg leading-relaxed mb-5">"Fast, creative, and professional. They turned rough concepts into a high-converting portfolio that actually generates leads for our business." </p><h4 class="text-fg font-bold">Marcus Thorne</h4><span class="text-purple text-sm font-medium">Founder,
+Thorne Creative</span></div></div></div></div><div class="w-full flex-shrink-0 px-2"><div class="bg-card border border-border p-8 md:p-10 rounded-2xl relative hover:border-border-hover transition-colors"><div class="absolute top-6 right-8 text-accent/10"><i class="fas fa-quote-right text-5xl"></i></div><div class="flex flex-col md:flex-row gap-6 items-start"><img src="https://picsum.photos/seed/elena-r/128/128.jpg" alt="Elena Rodriguez" loading="lazy" width="56" height="56" class="w-14 h-14 rounded-full object-cover border-2 border-pink/30 flex-shrink-0"><div><div class="flex text-amber-400 text-sm gap-0.5 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-fg/90 text-lg leading-relaxed mb-5">"Everything feels premium. The attention to detail is unmatched from start to finish. Our bounce rate dropped 60% after the redesign." </p><h4 class="text-fg font-bold">Elena Rodriguez</h4><span class="text-pink text-sm font-medium">Director,
+Luxe Interiors</span></div></div></div></div><div class="w-full flex-shrink-0 px-2"><div class="bg-card border border-border p-8 md:p-10 rounded-2xl relative hover:border-border-hover transition-colors"><div class="absolute top-6 right-8 text-accent/10"><i class="fas fa-quote-right text-5xl"></i></div><div class="flex flex-col md:flex-row gap-6 items-start"><img src="https://picsum.photos/seed/david-k/128/128.jpg" alt="David Kim" loading="lazy" width="56" height="56" class="w-14 h-14 rounded-full object-cover border-2 border-emerald-400/30 flex-shrink-0"><div><div class="flex text-amber-400 text-sm gap-0.5 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="text-fg/90 text-lg leading-relaxed mb-5">"They delivered a complex SaaS platform ahead of schedule. The codebase is clean, well-documented, and our dev team had zero issues taking over." </p><h4 class="text-fg font-bold">David Kim</h4><span class="text-emerald-400 text-sm font-medium">VP Engineering,
+StackLayer</span></div></div></div></div></div></div><div class="flex items-center justify-center gap-5 mt-10"><button id="prev-slide" class="w-11 h-11 rounded-full border border-border flex items-center justify-center text-fg-muted hover:bg-accent hover:border-accent hover:text-white transition-all duration-300" aria-label="Previous testimonial"><i class="fas fa-chevron-left text-sm"></i></button><div id="dots-container" class="flex gap-2.5"></div><button id="next-slide" class="w-11 h-11 rounded-full border border-border flex items-center justify-center text-fg-muted hover:bg-accent hover:border-accent hover:text-white transition-all duration-300" aria-label="Next testimonial"><i class="fas fa-chevron-right text-sm"></i></button></div></div></div></section>< !--=====CONTACT=====--><section id="contact" class="py-24 md:py-32 bg-surface/40 border-y border-border/30 relative overflow-hidden"><div class="absolute top-0 left-0 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-[120px] pointer-events-none"></div><div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple/[0.04] rounded-full blur-[120px] pointer-events-none"></div><div class="max-w-7xl mx-auto px-6 relative"><div class="text-center mb-16 reveal"><span class="text-accent font-mono text-sm tracking-wider uppercase mb-3 block">Get In Touch</span><h2 class="text-3xl md:text-5xl font-extrabold mb-5">Let's Build Something <span class="text-gradient">Massive</span></h2>
+ <p class="text-fg-muted text-lg max-w-2xl mx-auto">Fill out the form below and we will get back to you within 24 hours.</p></div><div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start"><div class="lg:col-span-2 space-y-8 reveal"><div><h3 class="text-xl font-bold text-fg mb-3">Contact Information</h3><p class="text-fg-muted leading-relaxed">We are currently accepting new projects. Whether you need a brand overhaul or a high-performance web application,
+we are ready.</p></div><div class="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-border-hover transition-all"><div class="w-11 h-11 rounded-lg bg-accent-soft flex items-center justify-center text-accent flex-shrink-0"><i class="fas fa-envelope text-sm"></i></div><div><p class="text-xs text-fg-muted font-medium uppercase tracking-wider mb-0.5">Email Us</p><a href="mailto:hello@fiverr-ai.com" class="text-fg font-semibold hover:text-accent transition-colors">hello@fiverr-ai.com</a></div></div><div class="flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-border-hover transition-all"><div class="w-11 h-11 rounded-lg bg-purple-soft flex items-center justify-center text-purple flex-shrink-0"><i class="fas fa-clock text-sm"></i></div><div><p class="text-xs text-fg-muted font-medium uppercase tracking-wider mb-0.5">Response Time</p><span class="text-fg font-semibold">Within 24 hours</span></div></div><div class="pt-6 border-t border-border"><p class="text-sm text-fg-muted mb-4">Follow our work</p><div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center text-fg-muted hover:bg-accent hover:border-accent hover:text-white transition-all duration-300" aria-label="Twitter"><i class="fab fa-x-twitter text-sm"></i></a><a href="#" class="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center text-fg-muted hover:bg-accent hover:border-accent hover:text-white transition-all duration-300" aria-label="LinkedIn"><i class="fab fa-linkedin-in text-sm"></i></a><a href="#" class="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center text-fg-muted hover:bg-pink hover:border-pink hover:text-white transition-all duration-300" aria-label="Instagram"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center text-fg-muted hover:bg-purple hover:border-purple hover:text-white transition-all duration-300" aria-label="Dribbble"><i class="fab fa-dribbble text-sm"></i></a></div></div></div><div class="lg:col-span-3 bg-card border border-border p-8 rounded-2xl shadow-card reveal reveal-delay-1"><form id="contact-form" class="space-y-5" novalidate><div class="grid sm:grid-cols-2 gap-5"><div><label for="name" class="block text-sm font-medium text-fg mb-1.5">Full Name</label><input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 rounded-lg text-fg text-sm" placeholder="John Doe"><p class="text-red-400 text-xs mt-1 hidden" data-error="name">Please enter your name.</p></div><div><label for="email" class="block text-sm font-medium text-fg mb-1.5">Email Address</label><input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 rounded-lg text-fg text-sm" placeholder="john@company.com"><p class="text-red-400 text-xs mt-1 hidden" data-error="email">Please enter a valid email.</p></div></div><div><label for="budget" class="block text-sm font-medium text-fg mb-1.5">Project Budget</label><div class="relative"><select id="budget" name="budget" required class="form-input w-full px-4 py-3 rounded-lg text-fg text-sm appearance-none cursor-pointer pr-10"><option value="" disabled selected>Select a range</option><option value="5k-10k">$5, 000 – $10, 000</option><option value="10k-25k">$10, 000 – $25, 000</option><option value="25k-50k">$25, 000 – $50, 000</option><option value="50k+">$50, 000+</option></select><div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-fg-muted"><i class="fas fa-chevron-down text-xs"></i></div></div><p class="text-red-400 text-xs mt-1 hidden" data-error="budget">Please select a budget range.</p></div><div><label for="message" class="block text-sm font-medium text-fg mb-1.5">Project Details</label><textarea id="message" name="message" rows="5" required class="form-input w-full px-4 py-3 rounded-lg text-fg text-sm resize-none" placeholder="Tell us about your goals, timeline, and specific requirements..."></textarea><p class="text-red-400 text-xs mt-1 hidden" data-error="message">Please describe your project.</p></div><button type="submit" id="submit-btn" class="w-full py-3.5 px-6 bg-accent hover:bg-accent-hover text-white font-bold rounded-xl shadow-glow hover:shadow-glow-lg transition-all duration-300 flex items-center justify-center gap-2.5 hover:-translate-y-0.5"><span>Send Request</span><i class="fas fa-arrow-right text-sm"></i></button></form></div></div></div></section></main>< !--=====FOOTER=====--><footer class="bg-base border-t border-border/50 pt-16 pb-8"><div class="max-w-7xl mx-auto px-6"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14"><div class="space-y-4"><a href="#top" class="inline-flex items-center gap-2.5"><div class="w-8 h-8 bg-gradient-to-br from-accent to-purple rounded-lg flex items-center justify-center text-white font-extrabold text-xs">F</div><span class="text-lg font-bold tracking-tight text-fg">Fiverr<span class="text-accent">-Ai</span></span></a><p class="text-fg-muted text-sm leading-relaxed">We craft digital experiences that merge art with technology to drive real business results.</p><div class="flex gap-3 pt-2"><a href="#" class="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center text-fg-muted hover:text-accent hover:border-accent transition-colors text-sm" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a><a href="#" class="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center text-fg-muted hover:text-accent hover:border-accent transition-colors text-sm" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="#" class="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center text-fg-muted hover:text-pink hover:border-pink transition-colors text-sm" aria-label="Instagram"><i class="fab fa-instagram"></i></a></div></div><div><h4 class="text-fg font-bold mb-4 text-sm uppercase tracking-wider">Services</h4><ul class="space-y-2.5"><li><a href="#services" class="text-fg-muted hover:text-accent transition-colors text-sm">Web Development</a></li><li><a href="#services" class="text-fg-muted hover:text-accent transition-colors text-sm">UI/UX Design</a></li><li><a href="#services" class="text-fg-muted hover:text-accent transition-colors text-sm">E-Commerce</a></li><li><a href="#services" class="text-fg-muted hover:text-accent transition-colors text-sm">SEO Optimization</a></li></ul></div><div><h4 class="text-fg font-bold mb-4 text-sm uppercase tracking-wider">Company</h4><ul class="space-y-2.5"><li><a href="#hero" class="text-fg-muted hover:text-accent transition-colors text-sm">About Us</a></li><li><a href="#portfolio" class="text-fg-muted hover:text-accent transition-colors text-sm">Our Work</a></li><li><a href="#testimonials" class="text-fg-muted hover:text-accent transition-colors text-sm">Reviews</a></li><li><a href="#contact" class="text-fg-muted hover:text-accent transition-colors text-sm">Contact</a></li></ul></div><div><h4 class="text-fg font-bold mb-4 text-sm uppercase tracking-wider">Stay Updated</h4><p class="text-fg-muted text-sm mb-4">Subscribe for the latest insights and updates.</p><form id="newsletter-form" class="space-y-2.5"><input type="email" id="newsletter-email" required placeholder="Enter your email" class="form-input w-full px-4 py-2.5 rounded-lg text-fg text-sm"><button type="submit" class="w-full px-4 py-2.5 bg-accent text-white font-semibold text-sm rounded-lg hover:bg-accent-hover transition-colors">Subscribe</button></form></div></div><div class="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"><p class="text-fg-muted text-sm">&copy;
+
+<span id="current-year"></span>Fiverr-Ai. All rights reserved.</p><div class="flex gap-6"><a href="#" class="text-fg-muted hover:text-fg text-sm transition-colors">Privacy Policy</a><a href="#" class="text-fg-muted hover:text-fg text-sm transition-colors">Terms of Service</a></div></div></div></footer>< !-- Back to top --><button id="back-to-top" class="back-to-top fixed bottom-6 right-6 w-11 h-11 rounded-xl bg-card border border-border flex items-center justify-center text-fg-muted hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 z-50 shadow-card" aria-label="Back to top"><i class="fas fa-arrow-up text-sm"></i></button>< !-- Toast container --><div id="toast" class="toast" role="alert" aria-live="polite"></div><script>document.addEventListener('DOMContentLoaded', ()=> {
+
+        // ===== UTILITIES =====
+        const $ =(sel)=> document.querySelector(sel);
+        const $$ =(sel)=> document.querySelectorAll(sel);
+
+        function showToast(message, type='success') {
+            const toast=$('#toast');
+            toast.textContent=message;
+
+            toast.className=`toast toast-$ {
+                type
+            }
+
+            show`;
+            clearTimeout(toast._timer);
+            toast._timer=setTimeout(()=> toast.classList.remove('show'), 3500);
+        }
+
+        // ===== MOBILE MENU =====
+        const mobileMenuBtn=$('#mobile-menu-btn');
+        const mobileMenu=$('#mobile-menu');
+        const mobileMenuClose=$('#mobile-menu-close');
+        const mobileLinks=$$('.mobile-menu-link');
+
+        function openMenu() {
+            mobileMenu.classList.add('is-open');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow='hidden';
+            // Focus first link after animation
+            setTimeout(()=> mobileLinks[0]?.focus(), 350);
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('is-open');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow='';
+            mobileMenuBtn.focus();
+        }
+
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileLinks.forEach(link=> link.addEventListener('click', closeMenu));
+
+        // Close on Escape
+        document.addEventListener('keydown', (e)=> {
+                if (e.key==='Escape' && mobileMenu.classList.contains('is-open')) closeMenu();
+            });
+
+        // ===== HEADER SCROLL =====
+        const header=$('#site-header');
+        let lastScroll=0;
+
+        window.addEventListener('scroll', ()=> {
+                const y=window.scrollY;
+                header.classList.toggle('scrolled', y > 40);
+                lastScroll=y;
+            }
+
+            , {
+            passive: true
+        });
+
+    // ===== SCROLL REVEAL =====
+    const revealObserver=new IntersectionObserver((entries)=> {
+            entries.forEach(entry=> {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+        }
+
+        , {
+        threshold: 0.1, rootMargin: '0px 0px -40px 0px'
+    });
+
+$$('.reveal').forEach(el=> revealObserver.observe(el));
+
+// ===== ACTIVE NAV LINKS (Scroll Spy) =====
+const sections=$$('section[id]');
+const navLinks=$$('.nav-link');
+
+const spyObserver=new IntersectionObserver((entries)=> {
+        entries.forEach(entry=> {
+                if (entry.isIntersecting) {
+                    const id=entry.target.id;
+
+                    navLinks.forEach(link=> {
+                            const isActive=link.getAttribute('href')===`#$ {
+                                id
+                            }
+
+                            `;
+                            link.classList.toggle('active', isActive);
+                        });
+                }
+            });
+    }
+
+    , {
+    threshold: 0.3, rootMargin: '-72px 0px -40% 0px'
+});
+
+sections.forEach(section=> spyObserver.observe(section));
+
+// ===== STATS COUNTER =====
+const statEls=$$('[data-count]');
+let statsCounted=false;
+
+const statsObserver=new IntersectionObserver((entries)=> {
+        entries.forEach(entry=> {
+                if (entry.isIntersecting && !statsCounted) {
+                    statsCounted=true;
+
+                    statEls.forEach(el=> {
+                            const target=parseInt(el.dataset.count, 10);
+                            const duration=2000;
+                            const start=performance.now();
+
+                            function tick(now) {
+                                const elapsed=now - start;
+                                const progress=Math.min(elapsed / duration, 1);
+                                // Ease out cubic
+                                const eased=1 - Math.pow(1 - progress, 3);
+                                el.textContent=Math.round(eased * target) + (target >=98 ? '%' : '+');
+                                if (progress < 1) requestAnimationFrame(tick);
+                            }
+
+                            requestAnimationFrame(tick);
+                        });
+                }
+            });
+    }
+
+    , {
+    threshold: 0.5
+});
+
+statEls.forEach(el=> statsObserver.observe(el));
+
+// ===== PORTFOLIO FILTERING =====
+const filterBtns=$$('.filter-btn');
+const portfolioItems=$$('.portfolio-item');
+const portfolioGrid=$('#portfolio-grid');
+
+filterBtns.forEach(btn=> {
+        btn.addEventListener('click', ()=> {
+                const filter=btn.dataset.filter;
+
+                // Update active button
+                filterBtns.forEach(b=> b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter items
+                portfolioItems.forEach(item=> {
+                        const category=item.dataset.category;
+                        const show=filter==='all' || category===filter;
+                        item.classList.toggle('is-hidden', !show);
+                    });
+            });
+    });
+
+// ===== TESTIMONIAL SLIDER =====
+const track=$('#testimonial-track');
+const viewport=$('#testimonial-viewport');
+const prevBtn=$('#prev-slide');
+const nextBtn=$('#next-slide');
+const dotsContainer=$('#dots-container');
+const slides=track.children;
+const totalSlides=slides.length;
+let currentSlide=0;
+let autoplayTimer=null;
+
+// Build dots dynamically
+for (let i=0; i < totalSlides; i++) {
+    const dot=document.createElement('button');
+
+    dot.className=`w-2.5 h-2.5 rounded-full transition-all duration-300 $ {
+        i===0 ? 'bg-accent w-8' : 'bg-fg-muted/30 hover:bg-fg-muted/50'
+    }
+
+    `;
+
+    dot.setAttribute('aria-label', `Go to slide $ {
+            i + 1
+        }
+
+        `);
+    dot.dataset.index=i;
+    dot.addEventListener('click', ()=> goToSlide(i));
+    dotsContainer.appendChild(dot);
+}
+
+const dots=dotsContainer.children;
+
+function goToSlide(index) {
+    currentSlide=((index % totalSlides) + totalSlides) % totalSlides;
+
+    track.style.transform=`translateX(-$ {
+            currentSlide * 100
+        }
+
+        %)`;
+
+    // Update dots
+    Array.from(dots).forEach((dot, i)=> {
+            if (i===currentSlide) {
+                dot.className='w-8 h-2.5 rounded-full bg-accent transition-all duration-300';
+            }
+
+            else {
+                dot.className='w-2.5 h-2.5 rounded-full bg-fg-muted/30 hover:bg-fg-muted/50 transition-all duration-300';
+            }
+        });
+
+    resetAutoplay();
+}
+
+function nextSlide() {
+    goToSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    goToSlide(currentSlide - 1);
+}
+
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+// Autoplay
+function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplayTimer=setInterval(nextSlide, 5000);
+}
+
+resetAutoplay();
+
+// Pause on hover
+viewport.addEventListener('mouseenter', ()=> clearInterval(autoplayTimer));
+viewport.addEventListener('mouseleave', resetAutoplay);
+
+// Touch / swipe support
+let touchStartX=0;
+let touchEndX=0;
+
+viewport.addEventListener('touchstart', (e)=> {
+        touchStartX=e.changedTouches[0].screenX;
+    }
+
+    , {
+    passive: true
+});
+
+viewport.addEventListener('touchend', (e)=> {
+        touchEndX=e.changedTouches[0].screenX;
+        const diff=touchStartX - touchEndX;
+
+        if (Math.abs(diff) > 50) {
+            diff > 0 ? nextSlide() : prevSlide();
+        }
+    }
+
+    , {
+    passive: true
+});
+
+// Keyboard navigation for slider
+viewport.setAttribute('tabindex', '0');
+
+viewport.addEventListener('keydown', (e)=> {
+        if (e.key==='ArrowLeft') prevSlide();
+        if (e.key==='ArrowRight') nextSlide();
+    });
+
+// ===== CONTACT FORM =====
+const contactForm=$('#contact-form');
+const submitBtn=$('#submit-btn');
+
+contactForm.addEventListener('submit', (e)=> {
+        e.preventDefault();
+        let valid=true;
+
+        // Clear previous errors
+        $$('[data-error]').forEach(el=> el.classList.add('hidden'));
+
+        // Validate name
+        const name=$('#name');
+
+        if ( !name.value.trim()) {
+            $('[data-error="name"]').classList.remove('hidden');
+            name.style.borderColor='#ef4444';
+            valid=false;
+        }
+
+        else {
+            name.style.borderColor='';
+        }
+
+        // Validate email
+        const email=$('#email');
+        const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if ( !emailRegex.test(email.value.trim())) {
+            $('[data-error="email"]').classList.remove('hidden');
+            email.style.borderColor='#ef4444';
+            valid=false;
+        }
+
+        else {
+            email.style.borderColor='';
+        }
+
+        // Validate budget
+        const budget=$('#budget');
+
+        if ( !budget.value) {
+            $('[data-error="budget"]').classList.remove('hidden');
+            budget.style.borderColor='#ef4444';
+            valid=false;
+        }
+
+        else {
+            budget.style.borderColor='';
+        }
+
+        // Validate message
+        const message=$('#message');
+
+        if ( !message.value.trim()) {
+            $('[data-error="message"]').classList.remove('hidden');
+            message.style.borderColor='#ef4444';
+            valid=false;
+        }
+
+        else {
+            message.style.borderColor='';
+        }
+
+        if ( !valid) return;
+
+        // Simulate submission
+        const originalHTML=submitBtn.innerHTML;
+        submitBtn.disabled=true;
+        submitBtn.innerHTML='<i class="fas fa-spinner fa-spin text-sm"></i> <span>Sending...</span>';
+
+        setTimeout(()=> {
+                submitBtn.disabled=false;
+                submitBtn.innerHTML=originalHTML;
+                contactForm.reset();
+                showToast('Message sent successfully! We will be in touch soon.', 'success');
+            }
+
+            , 1500);
+    });
+
+// Clear error styling on input
+['name', 'email', 'budget', 'message'].forEach(id=> {
+        const el=$(`#$ {
+                id
+            }
+
+            `);
+
+        el.addEventListener('input', ()=> {
+                el.style.borderColor='';
+                const errorEl=$(`[data-error="${id}"]`);
+                if (errorEl) errorEl.classList.add('hidden');
+            });
+
+        el.addEventListener('change', ()=> {
+                el.style.borderColor='';
+                const errorEl=$(`[data-error="${id}"]`);
+                if (errorEl) errorEl.classList.add('hidden');
+            });
+    });
+
+// ===== NEWSLETTER FORM =====
+const newsletterForm=$('#newsletter-form');
+
+newsletterForm.addEventListener('submit', (e)=> {
+        e.preventDefault();
+        const emailInput=$('#newsletter-email');
+        const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if ( !emailRegex.test(emailInput.value.trim())) {
+            showToast('Please enter a valid email address.', 'error');
+            return;
+        }
+
+        emailInput.value='';
+        showToast('Subscribed successfully! Welcome aboard.', 'success');
+    });
+
+// ===== BACK TO TOP =====
+const backToTop=$('#back-to-top');
+
+window.addEventListener('scroll', ()=> {
+        backToTop.classList.toggle('is-visible', window.scrollY > 600);
+    }
+
+    , {
+    passive: true
+});
+
+backToTop.addEventListener('click', ()=> {
+        window.scrollTo({
+            top: 0, behavior: 'smooth'
+        });
+});
+
+// ===== FOOTER YEAR =====
+$('#current-year').textContent=new Date().getFullYear();
+
+});
+</script></body></html>
