@@ -470,4 +470,19 @@
   }
 }
 
+/* Disable heavy animations and transitions on small screens to avoid flashes */
+@media (max-width: 767px) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  /* Keep image placeholder behavior but avoid scale/transform flicker */
+  img[data-loaded="false"] {
+    transform: none !important;
+    filter: blur(6px) saturate(0.9) !important;
+  }
+}
+
 /* Mobile marquee rules removed */

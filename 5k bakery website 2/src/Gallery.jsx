@@ -134,17 +134,25 @@ function ImageTile({ image, index, onClick, rowSpan = 1 }) {
       animate={{ y: hovered ? -8 : 0, scale: hovered ? 1.012 : 1 }}
       transition={{ duration: 0.5, ease: EASE_SPRING }}
     >
-      {/* Image with subtle scale */}
-      <div className="absolute inset-0 overflow-hidden rounded-2xl">
+      {/* Image with subtle scale and LQIP background */}
+      <div
+        className="absolute inset-0 overflow-hidden rounded-2xl"
+        style={{
+          backgroundImage: `url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Crect width='100%25' height='100%25' fill='%23E8DDD0'/%3E%3C/svg%3E")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <motion.img
           src={image.img}
           alt={image.title}
           className="w-full h-full object-cover"
           loading="lazy"
+          data-loaded="false"
           initial={{ opacity: 0 }}
           animate={{ opacity: loaded ? 1 : 0, scale: hovered ? 1.06 : 1 }}
           transition={{ duration: 0.5, ease: EASE_SPRING }}
-          onLoad={() => setLoaded(true)}
+          onLoad={(e) => { e.currentTarget.setAttribute('data-loaded','true'); setLoaded(true); }}
         />
       </div>
 
