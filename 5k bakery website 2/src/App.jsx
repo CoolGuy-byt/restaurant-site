@@ -44,27 +44,6 @@ import focacciaRosemaryImg from "./assets/focaccia-rosemary.jpg";
 import lemonTartImg from "./assets/lemon-tart.jpg";
 import sundayLoafImg from "./assets/sunday-loaf.jpg";
 
-function handleImgLoad(e) {
-  try {
-    e.currentTarget.setAttribute("data-loaded", "true");
-  } catch (err) {
-    /* ignore */
-  }
-}
-
-// Small SVG LQIP placeholders (warm gradient) for hero and about images
-const lqipHero =
-  'data:image/svg+xml;utf8,' +
-  encodeURIComponent(
-    "<svg xmlns='http://www.w3.org/2000/svg' width='800' height='1000' viewBox='0 0 800 1000'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23E8DDD0'/><stop offset='1' stop-color='%23F5EDE3'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/></svg>"
-  );
-
-const lqipAbout =
-  'data:image/svg+xml;utf8,' +
-  encodeURIComponent(
-    "<svg xmlns='http://www.w3.org/2000/svg' width='600' height='450' viewBox='0 0 600 450'><defs><linearGradient id='g2' x1='0' x2='1'><stop offset='0' stop-color='%23F5EDE3'/><stop offset='1' stop-color='%23E8DDD0'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g2)'/></svg>"
-  );
-
 /* ─── EASING CONSTANTS ─── */
 const EASE_OUT = [0.16, 1, 0.3, 1];
 const EASE_SPRING = [0.23, 1, 0.32, 1];
@@ -377,7 +356,7 @@ function Hero() {
             <Reveal delay={0.8}>
               <div className="mt-10 flex items-center gap-8">
                 <div className="flex -space-x-3">
-                      {[1, 2, 3, 4].map((i) => (
+                  {[1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
                       className="w-10 h-10 rounded-full border-2 border-cream bg-warm-stone overflow-hidden"
@@ -386,10 +365,6 @@ function Hero() {
                         src={`https://picsum.photos/seed/baker${i}/80/80`}
                         alt=""
                         className="w-full h-full object-cover"
-                        data-loaded="false"
-                        onLoad={handleImgLoad}
-                        decoding="async"
-                        loading="lazy"
                       />
                     </div>
                   ))}
@@ -414,12 +389,6 @@ function Hero() {
               {/* Main hero image */}
               <motion.div
                 className="rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl shadow-espresso/10"
-                style={{
-                  backgroundColor: "var(--color-warm-stone)",
-                  backgroundImage: `url("${lqipHero}")`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5, ease: EASE_OUT }}
               >
@@ -427,10 +396,6 @@ function Hero() {
                   src={heroImg}
                   alt="Fresh artisan bread from the oven"
                   className="w-full h-full object-cover"
-                  data-loaded="false"
-                  onLoad={handleImgLoad}
-                  decoding="async"
-                  loading="eager"
                 />
               </motion.div>
 
@@ -541,23 +506,11 @@ function About() {
           {/* Left - Image (larger, asymmetric) */}
           <div className="lg:col-span-7">
             <Reveal className="relative">
-              <div
-                className="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl shadow-espresso/5"
-                style={{
-                  backgroundColor: "var(--color-warm-stone)",
-                  backgroundImage: `url("${lqipAbout}")`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
+              <div className="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl shadow-espresso/5">
                 <img
                   src={aboutBakeryImg}
                   alt="Bakery interior with warm lighting"
                   className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700 ease-out"
-                  data-loaded="false"
-                  onLoad={handleImgLoad}
-                  decoding="async"
-                  loading="lazy"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 w-40 h-40 rounded-3xl border-2 border-terracotta/20 -z-10" />
@@ -858,15 +811,11 @@ function Products() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
-                  <div className="rounded-2xl overflow-hidden shadow-sm shadow-espresso/5 aspect-[4/5] relative" style={{ backgroundColor: "var(--color-warm-stone)" }}>
+                  <div className="rounded-2xl overflow-hidden bg-white shadow-sm shadow-espresso/5 aspect-[4/5] relative">
                     <img
                       src={product.img}
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700 ease-out"
-                      data-loaded="false"
-                      onLoad={handleImgLoad}
-                      decoding="async"
-                      loading="lazy"
                     />
                     {/* Overlay on hover */}
                     <div className="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/15 transition-colors duration-300" />
@@ -959,9 +908,8 @@ function Featured() {
           {/* Image - right offset, large */}
           <div className="lg:col-span-5 lg:-ml-12 lg:order-2">
             <Reveal delay={0.2}>
-                <motion.div
+              <motion.div
                 className="rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl shadow-espresso/10"
-                style={{ backgroundColor: "var(--color-warm-stone)" }}
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.5, ease: EASE_OUT }}
               >
@@ -969,10 +917,6 @@ function Featured() {
                   src={sundayLoafImg}
                   alt="The Sunday Loaf - signature sourdough"
                   className="w-full h-full object-cover"
-                  data-loaded="false"
-                  onLoad={handleImgLoad}
-                  decoding="async"
-                  loading="lazy"
                 />
               </motion.div>
             </Reveal>
@@ -1195,8 +1139,6 @@ function ReviewModal({ isOpen, onClose }) {
 function Testimonials() {
   const [modalOpen, setModalOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  const [isMobile, setIsMobile] = useState(false);
-  const [showAllReviews, setShowAllReviews] = useState(false);
   const carouselRef = useRef(null);
   const isDraggingRef = useRef(false);   // true while mouse button is held
   const dragStart = useRef({ x: 0, scrollLeft: 0 });
@@ -1249,18 +1191,6 @@ function Testimonials() {
     },
   ];
 
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)');
-    const handler = (e) => setIsMobile(e.matches);
-    setIsMobile(mq.matches);
-    if (mq.addEventListener) mq.addEventListener('change', handler);
-    else mq.addListener(handler);
-    return () => {
-      if (mq.removeEventListener) mq.removeEventListener('change', handler);
-      else mq.removeListener(handler);
-    };
-  }, []);
-
   return (
     <section id="testimonials" className="py-24 lg:py-32 relative overflow-visible lg:overflow-hidden">
       {/* Background decoration */}
@@ -1300,108 +1230,159 @@ function Testimonials() {
           </h2>
         </Reveal>
 
-        {/* Horizontal Scroll Carousel (desktop) / Vertical stacked reviews (mobile) */}
+        {/* Horizontal Scroll Carousel */}
         <div className="mt-16">
-          {isMobile ? (
-            <div className="space-y-4">
-              {(showAllReviews ? testimonials : testimonials.slice(0, 2)).map((t, i) => (
-                <div key={i} className="review-card review-card-bg review-card-hover w-full" style={{ position: "relative", overflow: "hidden" }}>
-                  <Quotes className="w-6 h-6 text-terracotta/6 absolute top-4 right-4" weight="fill" />
-                  <div className="px-5 pt-6">
-                    <div className="flex items-center gap-3">
-                      {[1, 2, 3, 4, 5].map((s) => (
-                        <Star key={s} className="w-4 h-4 text-terracotta" weight="fill" />
-                      ))}
-                    </div>
-                    <p className="text-sm leading-relaxed text-espresso/70 mt-3">
-                      {t.quote}
+          <div
+            ref={carouselRef}
+            className="carousel-scroll"
+            onMouseDown={(e) => {
+              if (e.target.closest('.cta-review')) return;
+              if (rafId.current) cancelAnimationFrame(rafId.current);
+              velocity.current = 0;
+              isDraggingRef.current = true;
+              dragStart.current = { x: e.pageX, scrollLeft: carouselRef.current.scrollLeft };
+              lastX.current = e.pageX;
+              carouselRef.current.classList.add("dragging");
+              e.preventDefault(); // prevent text selection
+            }}
+            onMouseMove={(e) => {
+              if (!isDraggingRef.current || !carouselRef.current) return;
+              const dx = e.pageX - lastX.current;
+              velocity.current = dx;
+              lastX.current = e.pageX;
+              const walk = (e.pageX - dragStart.current.x);
+              carouselRef.current.scrollLeft = dragStart.current.scrollLeft - walk;
+            }}
+            onMouseUp={() => {
+              if (!isDraggingRef.current) return;
+              isDraggingRef.current = false;
+              if (carouselRef.current) {
+                carouselRef.current.classList.remove("dragging");
+              }
+              const el = carouselRef.current;
+              const startMomentum = () => {
+                if (Math.abs(velocity.current) < 0.5) return;
+                el.scrollLeft -= velocity.current;
+                velocity.current *= 0.92;
+                rafId.current = requestAnimationFrame(startMomentum);
+              };
+              rafId.current = requestAnimationFrame(startMomentum);
+            }}
+            onMouseLeave={(e) => {
+              if (!isDraggingRef.current) return;
+              isDraggingRef.current = false;
+              if (carouselRef.current) {
+                carouselRef.current.classList.remove("dragging");
+              }
+              const el = carouselRef.current;
+              const startMomentum = () => {
+                if (Math.abs(velocity.current) < 0.5) return;
+                el.scrollLeft -= velocity.current;
+                velocity.current *= 0.92;
+                rafId.current = requestAnimationFrame(startMomentum);
+              };
+              rafId.current = requestAnimationFrame(startMomentum);
+            }}
+            onTouchStart={(e) => {
+              if (e.target.closest('.cta-review')) return;
+              if (rafId.current) cancelAnimationFrame(rafId.current);
+              const x = e.touches[0].pageX;
+              velocity.current = 0;
+              isDraggingRef.current = true;
+              dragStart.current = { x, scrollLeft: carouselRef.current.scrollLeft };
+              lastX.current = x;
+              carouselRef.current.classList.add('dragging');
+            }}
+            onTouchMove={(e) => {
+              if (!isDraggingRef.current || !carouselRef.current) return;
+              const x = e.touches[0].pageX;
+              const dx = x - lastX.current;
+              velocity.current = dx;
+              lastX.current = x;
+              const walk = x - dragStart.current.x;
+              carouselRef.current.scrollLeft = dragStart.current.scrollLeft - walk;
+            }}
+            onTouchEnd={() => {
+              if (!isDraggingRef.current) return;
+              isDraggingRef.current = false;
+              if (carouselRef.current) carouselRef.current.classList.remove('dragging');
+              const el = carouselRef.current;
+              const startMomentum = () => {
+                if (Math.abs(velocity.current) < 0.5) return;
+                el.scrollLeft -= velocity.current;
+                velocity.current *= 0.92;
+                rafId.current = requestAnimationFrame(startMomentum);
+              };
+              rafId.current = requestAnimationFrame(startMomentum);
+            }}
+            onTouchCancel={() => {
+              if (!isDraggingRef.current) return;
+              isDraggingRef.current = false;
+              if (carouselRef.current) carouselRef.current.classList.remove('dragging');
+            }}
+          >
+            {testimonials.map((t, i) => (
+              <div key={i} className="review-card review-card-bg review-card-hover" style={{ position: "relative", overflow: "hidden" }}>
+                <Quotes className="w-8 h-8 text-terracotta/6 absolute top-5 right-5" weight="fill" />
+                <div className="flex items-center gap-1 px-7 pt-7">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <Star key={s} className="w-4 h-4 text-terracotta" weight="fill" />
+                  ))}
+                </div>
+                <p className="text-sm leading-relaxed text-espresso/70 px-7 pt-3 pb-2">
+                  {t.quote}
+                </p>
+                <div className="flex items-center gap-3 px-7 pb-7 pt-4 mt-1 border-t border-espresso/5">
+                  <img
+                    src={t.img}
+                    alt={t.name}
+                    className="w-10 h-10 rounded-full object-cover ring-2 ring-cream"
+                  />
+                  <div>
+                    <p className="text-sm font-semibold text-espresso">
+                      {t.name}
+                    </p>
+                    <p className="text-xs text-espresso/40">
+                      {t.role}
                     </p>
                   </div>
-                  <div className="flex items-center gap-3 px-5 pb-5 pt-4 mt-3 border-t border-espresso/5">
-                    <img src={t.img} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-cream" loading="lazy" decoding="async" />
-                    <div>
-                      <p className="text-sm font-semibold text-espresso">{t.name}</p>
-                      <p className="text-xs text-espresso/40">{t.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* Mobile CTA: Share your experience */}
-              <div className="mt-2">
-                <div
-                  onClick={() => setModalOpen(true)}
-                  className="review-card cta-review cursor-pointer flex flex-col items-center justify-center text-center px-6 py-6 w-full rounded-2xl bg-terracotta/6"
-                >
-                  <div className="w-12 h-12 bg-terracotta/10 rounded-2xl flex items-center justify-center mb-3">
-                    <PenNib className="w-5 h-5 text-terracotta" weight="fill" />
-                  </div>
-                  <h4 className="font-semibold text-espresso mb-1">Share your experience</h4>
-                  <p className="text-xs text-espresso/60">Loved your visit? Tell us about it.</p>
                 </div>
               </div>
+            ))}
 
-              <div className="flex justify-center mt-3">
-                <button onClick={() => setShowAllReviews(s => !s)} className="px-4 py-2 bg-terracotta text-cream rounded-lg">
-                  {showAllReviews ? 'Show less' : 'Show more'}
-                </button>
-              </div>
-            </div>
-          ) : (
+            {/* CTA Card */}
             <div
-              ref={carouselRef}
-              className="carousel-scroll"
+              onClick={() => setModalOpen(true)}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                setMousePos({
+                  x: ((e.clientX - rect.left) / rect.width) * 100,
+                  y: ((e.clientY - rect.top) / rect.height) * 100,
+                });
+              }}
+              className="review-card cta-review cursor-pointer flex flex-col items-center justify-center text-center px-7 py-10"
+              style={{ '--mouse-x': `${mousePos.x}%`, '--mouse-y': `${mousePos.y}%` }}
             >
-              {testimonials.map((t, i) => (
-                <div key={i} className="review-card review-card-bg review-card-hover" style={{ position: "relative", overflow: "hidden" }}>
-                  <Quotes className="w-8 h-8 text-terracotta/6 absolute top-5 right-5" weight="fill" />
-                  <div className="flex items-center gap-1 px-7 pt-7">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className="w-4 h-4 text-terracotta" weight="fill" />
-                    ))}
-                  </div>
-                  <p className="text-sm leading-relaxed text-espresso/70 px-7 pt-3 pb-2">
-                    {t.quote}
-                  </p>
-                  <div className="flex items-center gap-3 px-7 pb-7 pt-4 mt-1 border-t border-espresso/5">
-                    <img src={t.img} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-cream" loading="lazy" decoding="async" />
-                    <div>
-                      <p className="text-sm font-semibold text-espresso">{t.name}</p>
-                      <p className="text-xs text-espresso/40">{t.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* CTA Card */}
-              <div
-                onClick={() => setModalOpen(true)}
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  setMousePos({
-                    x: ((e.clientX - rect.left) / rect.width) * 100,
-                    y: ((e.clientY - rect.top) / rect.height) * 100,
-                  });
-                }}
-                className="review-card cta-review cursor-pointer flex flex-col items-center justify-center text-center px-7 py-10"
-                style={{ '--mouse-x': `${mousePos.x}%`, '--mouse-y': `${mousePos.y}%` }}
-              >
-                <div className="w-14 h-14 bg-terracotta/10 rounded-2xl flex items-center justify-center mb-4 hover:bg-terracotta/15 transition-colors duration-300">
-                  <PenNib className="w-6 h-6 text-terracotta transition-transform duration-300 pen-nib-icon" weight="fill" />
-                </div>
-                <h3 className="font-display text-base text-espresso mb-1" style={{ fontFamily: "var(--font-display)" }}>
-                  Share your experience
-                </h3>
-                <p className="text-xs text-espresso/50 leading-relaxed max-w-[200px]">
-                  Loved your visit? We'd be honored to hear about it.
-                </p>
-                <div className="flex items-center gap-1.5 text-terracotta font-semibold text-xs mt-4 transition-all duration-300 cta-arrow-wrapper">
-                  Write a Review
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 cta-arrow" weight="bold" />
-                </div>
+              <div className="w-14 h-14 bg-terracotta/10 rounded-2xl flex items-center justify-center mb-4 hover:bg-terracotta/15 transition-colors duration-300">
+                <PenNib className="w-6 h-6 text-terracotta transition-transform duration-300 pen-nib-icon" weight="fill" />
+              </div>
+              <h3 className="font-display text-base text-espresso mb-1" style={{ fontFamily: "var(--font-display)" }}>
+                Share your experience
+              </h3>
+              <p className="text-xs text-espresso/50 leading-relaxed max-w-[200px]">
+                Loved your visit? We'd be honored to hear about it.
+              </p>
+              <div className="flex items-center gap-1.5 text-terracotta font-semibold text-xs mt-4 transition-all duration-300 cta-arrow-wrapper">
+                Write a Review
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 cta-arrow" weight="bold" />
               </div>
             </div>
-          )}
+          </div>
+
+          <div className="carousel-hint mt-4">
+            <ArrowRight className="w-4 h-4" weight="bold" />
+            Swipe to explore more reviews
+          </div>
         </div>
 
 
