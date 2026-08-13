@@ -1,0 +1,458 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FDF6EE;
+  --color-cream-dark: #F5EDE3;
+  --color-espresso: #2C1810;
+  --color-chocolate: #3D2B1F;
+  --color-terracotta: #C4724E;
+  --color-terracotta-hover: #B36341;
+  --color-sage: #8B9A77;
+  --color-sage-light: #D4DFC8;
+  --color-ivory: #FAF3E8;
+  --color-warm-stone: #E8DDD0;
+  --color-warm-stone-dark: #C4B8A8;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Compensate for fixed navbar on anchor links */
+  section[id], div[id] {
+    scroll-margin-top: 80px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-cream);
+    color: var(--color-espresso);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-terracotta);
+    color: var(--color-cream);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Custom easing curves from Emil's philosophy */
+  .ease-out-expo {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ease-spring {
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .ease-in-out-smooth {
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+}
+
+/* Marquee animation */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-left 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Horizontal Review Carousel ─── */
+
+/* Horizontal scroll container with native snap */
+.carousel-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* No scroll-behavior:smooth here — it fights the JS drag & momentum */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  touch-action: pan-y;
+}
+
+.carousel-scroll:active {
+  cursor: grabbing;
+}
+
+.carousel-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual review card — snap target */
+.review-card {
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  border-radius: 1.5rem;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 48px rgba(44, 24, 16, 0.10),
+    0 4px 12px rgba(44, 24, 16, 0.05);
+}
+
+/* Suppress hover lift while drag is active */
+.carousel-scroll.dragging .review-card {
+  transform: none !important;
+  box-shadow: none !important;
+  transition: none;
+}
+
+.carousel-scroll.dragging {
+  cursor: grabbing;
+}
+
+/* Mobile: slightly smaller cards */
+@media (max-width: 767px) {
+  .review-card {
+    flex: 0 0 290px;
+  }
+}
+
+
+/* Disable snap during drag for free-form momentum */
+.carousel-scroll.dragging {
+  scroll-snap-type: none;
+}
+
+
+/* Review card base background */
+.review-card-bg {
+  background: var(--color-cream);
+  border: 1px solid rgba(44, 24, 16, 0.06);
+  box-shadow:
+    0 4px 16px rgba(44, 24, 16, 0.04),
+    0 1px 4px rgba(44, 24, 16, 0.03);
+}
+
+/* Review card hover state */
+.review-card-hover {
+  transition: border-color 0.3s ease;
+}
+
+.review-card-hover:hover {
+  border-color: rgba(196, 114, 78, 0.2);
+}
+
+/* Share your experience CTA card */
+.cta-review {
+  background: linear-gradient(145deg, var(--color-cream), var(--color-ivory));
+  border: 2px dashed rgba(196, 114, 78, 0.25);
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s ease, background 0.4s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-review::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(196, 114, 78, 0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.cta-review::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(196, 114, 78, 0.3), rgba(196, 114, 78, 0.05), rgba(196, 114, 78, 0.3));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.cta-review:hover {
+  border-color: rgba(196, 114, 78, 0.5);
+  background: var(--color-ivory);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 20px 48px rgba(196, 114, 78, 0.12),
+    0 8px 16px rgba(196, 114, 78, 0.06);
+}
+
+.cta-review:hover::before {
+  opacity: 1;
+}
+
+.cta-review:hover::after {
+  opacity: 0.5;
+}
+
+/* Pen nib and arrow micro-interactions on CTA hover */
+.cta-review:hover .pen-nib-icon {
+  transform: rotate(-12deg);
+}
+
+.cta-review:hover .cta-arrow {
+  transform: translateX(2px);
+}
+
+.cta-review:hover .cta-arrow-wrapper {
+  transform: translateX(2px);
+}
+
+/* Scroll hint indicator */
+.carousel-hint {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .carousel-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(44, 24, 16, 0.35);
+    font-weight: 500;
+  }
+}
+
+/* ─── Legacy glass review classes (keep for modal) ─── */
+.glass-review {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 8px 32px rgba(44, 24, 16, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.glass-review-hover {
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+}
+
+.glass-review-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 60px rgba(44, 24, 16, 0.12),
+    0 0 0 1px rgba(196, 114, 78, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-color: rgba(196, 114, 78, 0.3);
+}
+
+.glass-review-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent);
+  transition: left 0.6s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass-review-hover:hover::before {
+  left: 100%;
+}
+
+.glass-review-dark {
+  background: rgba(44, 24, 16, 0.65);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(44, 24, 16, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-review-dark-hover {
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+}
+
+.glass-review-dark-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 24px 64px rgba(44, 24, 16, 0.45),
+    0 0 0 1px rgba(196, 114, 78, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(196, 114, 78, 0.4);
+}
+
+.glass-review-dark-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent);
+  transition: left 0.6s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass-review-dark-hover:hover::before {
+  left: 100%;
+}
+
+/* Modal overlay backdrop */
+.modal-backdrop {
+  background: rgba(44, 24, 16, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Glass input */
+.glass-input {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: rgba(196, 114, 78, 0.6);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(196, 114, 78, 0.15);
+}
+
+.glass-input-dark {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.glass-input-dark:focus {
+  outline: none;
+  border-color: rgba(196, 114, 78, 0.5);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 3px rgba(196, 114, 78, 0.12);
+}
+
+/* Star rating interactive */
+.star-btn {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.star-btn:hover {
+  transform: scale(1.25);
+}
+
+/* Review submit button glow */
+.review-submit-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.review-submit-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-terracotta), #e08a5e, var(--color-terracotta));
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.review-submit-glow:hover::after {
+  opacity: 0.6;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-warm-stone-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-terracotta);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile: hide marquee to avoid performance and layout issues */
+@media (max-width: 767px) {
+  .marquee-section {
+    display: none;
+  }
+}
