@@ -148,6 +148,8 @@ function ImageTile({ image, index, onClick, rowSpan = 1 }) {
           alt={image.title}
           className="w-full h-full object-cover"
           loading="lazy"
+          decoding="async"
+          fetchPriority="low"
           data-loaded="false"
           initial={{ opacity: 0 }}
           animate={{ opacity: loaded ? 1 : 0, scale: hovered ? 1.06 : 1 }}
@@ -241,7 +243,7 @@ function ImageTile({ image, index, onClick, rowSpan = 1 }) {
 function PullQuote({ quote, delay = 0 }) {
   return (
     <Reveal delay={delay} y={32}>
-      <div className="rounded-2xl bg-white/50 backdrop-blur-sm border border-terracotta/8 p-6 md:p-8 shadow-sm shadow-espresso/3 hover:shadow-md hover:shadow-espresso/5 hover:border-terracotta/15 transition-all duration-500 h-full flex flex-col justify-between">
+      <div className="rounded-2xl bg-white/50 backdrop-blur-sm border border-terracotta/8 p-6 md:p-8 shadow-sm shadow-espresso/3 hover:shadow-md hover:shadow-espresso/5 hover:border-terracotta/15 transition-all duration-500 h-auto md:h-full flex flex-col justify-between">
         {/* Top: icon + quote */}
         <div>
           <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-terracotta/40 via-terracotta/20 to-transparent rounded-l-2xl" />
@@ -288,7 +290,7 @@ function PullQuote({ quote, delay = 0 }) {
 function DarkQuoteCard({ quote, delay = 0 }) {
   return (
     <Reveal delay={delay} y={32}>
-      <div className="rounded-2xl bg-espresso p-6 md:p-7 shadow-xl shadow-espresso/20 hover:shadow-2xl hover:shadow-espresso/30 hover:border-white/12 transition-all duration-500 h-full flex flex-col justify-center border border-white/5">
+      <div className="rounded-2xl bg-espresso p-6 md:p-7 shadow-xl shadow-espresso/20 hover:shadow-2xl hover:shadow-espresso/30 hover:border-white/12 transition-all duration-500 h-auto md:h-full flex flex-col justify-center border border-white/5">
         <Quotes className="w-4 h-4 text-terracotta/35 mb-3" weight="fill" />
         <p
           className="font-display text-sm md:text-base italic leading-relaxed text-balance text-cream/80"
@@ -405,6 +407,9 @@ function Lightbox({ index, onClose, onNext, onPrev }) {
             src={image.img}
             alt={image.title}
             className="block max-h-[65vh] object-contain rounded-2xl"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, ease: EASE_OUT }}
@@ -511,7 +516,7 @@ export default function Gallery() {
         </Reveal>
 
         {/* ─── Asymmetric Grid ─── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5 auto-rows-fr">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5 auto-rows-auto sm:auto-rows-fr">
 
           {/* ROW 1: COL 1-2 (wide) — New dawn image filling the top-left gap */}
           <div className="md:col-span-1 lg:col-span-2 md:min-h-[260px]">

@@ -1195,6 +1195,8 @@ function ReviewModal({ isOpen, onClose }) {
 function Testimonials() {
   const [modalOpen, setModalOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [showAllReviews, setShowAllReviews] = useState(false);
   const carouselRef = useRef(null);
   const isDraggingRef = useRef(false);   // true while mouse button is held
   const dragStart = useRef({ x: 0, scrollLeft: 0 });
@@ -1247,6 +1249,18 @@ function Testimonials() {
     },
   ];
 
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const handler = (e) => setIsMobile(e.matches);
+    setIsMobile(mq.matches);
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else mq.addListener(handler);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handler);
+      else mq.removeListener(handler);
+    };
+  }, []);
+
   return (
     <section id="testimonials" className="py-24 lg:py-32 relative overflow-visible lg:overflow-hidden">
       {/* Background decoration */}
@@ -1286,159 +1300,94 @@ function Testimonials() {
           </h2>
         </Reveal>
 
-        {/* Horizontal Scroll Carousel */}
+        {/* Horizontal Scroll Carousel (desktop) / Vertical stacked reviews (mobile) */}
         <div className="mt-16">
-          <div
-            ref={carouselRef}
-            className="carousel-scroll"
-            onMouseDown={(e) => {
-              if (e.target.closest('.cta-review')) return;
-              if (rafId.current) cancelAnimationFrame(rafId.current);
-              velocity.current = 0;
-              isDraggingRef.current = true;
-              dragStart.current = { x: e.pageX, scrollLeft: carouselRef.current.scrollLeft };
-              lastX.current = e.pageX;
-              carouselRef.current.classList.add("dragging");
-              e.preventDefault(); // prevent text selection
-            }}
-            onMouseMove={(e) => {
-              if (!isDraggingRef.current || !carouselRef.current) return;
-              const dx = e.pageX - lastX.current;
-              velocity.current = dx;
-              lastX.current = e.pageX;
-              const walk = (e.pageX - dragStart.current.x);
-              carouselRef.current.scrollLeft = dragStart.current.scrollLeft - walk;
-            }}
-            onMouseUp={() => {
-              if (!isDraggingRef.current) return;
-              isDraggingRef.current = false;
-              if (carouselRef.current) {
-                carouselRef.current.classList.remove("dragging");
-              }
-              const el = carouselRef.current;
-              const startMomentum = () => {
-                if (Math.abs(velocity.current) < 0.5) return;
-                el.scrollLeft -= velocity.current;
-                velocity.current *= 0.92;
-                rafId.current = requestAnimationFrame(startMomentum);
-              };
-              rafId.current = requestAnimationFrame(startMomentum);
-            }}
-            onMouseLeave={(e) => {
-              if (!isDraggingRef.current) return;
-              isDraggingRef.current = false;
-              if (carouselRef.current) {
-                carouselRef.current.classList.remove("dragging");
-              }
-              const el = carouselRef.current;
-              const startMomentum = () => {
-                if (Math.abs(velocity.current) < 0.5) return;
-                el.scrollLeft -= velocity.current;
-                velocity.current *= 0.92;
-                rafId.current = requestAnimationFrame(startMomentum);
-              };
-              rafId.current = requestAnimationFrame(startMomentum);
-            }}
-            onTouchStart={(e) => {
-              if (e.target.closest('.cta-review')) return;
-              if (rafId.current) cancelAnimationFrame(rafId.current);
-              const x = e.touches[0].pageX;
-              velocity.current = 0;
-              isDraggingRef.current = true;
-              dragStart.current = { x, scrollLeft: carouselRef.current.scrollLeft };
-              lastX.current = x;
-              carouselRef.current.classList.add('dragging');
-            }}
-            onTouchMove={(e) => {
-              if (!isDraggingRef.current || !carouselRef.current) return;
-              const x = e.touches[0].pageX;
-              const dx = x - lastX.current;
-              velocity.current = dx;
-              lastX.current = x;
-              const walk = x - dragStart.current.x;
-              carouselRef.current.scrollLeft = dragStart.current.scrollLeft - walk;
-            }}
-            onTouchEnd={() => {
-              if (!isDraggingRef.current) return;
-              isDraggingRef.current = false;
-              if (carouselRef.current) carouselRef.current.classList.remove('dragging');
-              const el = carouselRef.current;
-              const startMomentum = () => {
-                if (Math.abs(velocity.current) < 0.5) return;
-                el.scrollLeft -= velocity.current;
-                velocity.current *= 0.92;
-                rafId.current = requestAnimationFrame(startMomentum);
-              };
-              rafId.current = requestAnimationFrame(startMomentum);
-            }}
-            onTouchCancel={() => {
-              if (!isDraggingRef.current) return;
-              isDraggingRef.current = false;
-              if (carouselRef.current) carouselRef.current.classList.remove('dragging');
-            }}
-          >
-            {testimonials.map((t, i) => (
-              <div key={i} className="review-card review-card-bg review-card-hover" style={{ position: "relative", overflow: "hidden" }}>
-                <Quotes className="w-8 h-8 text-terracotta/6 absolute top-5 right-5" weight="fill" />
-                <div className="flex items-center gap-1 px-7 pt-7">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star key={s} className="w-4 h-4 text-terracotta" weight="fill" />
-                  ))}
-                </div>
-                <p className="text-sm leading-relaxed text-espresso/70 px-7 pt-3 pb-2">
-                  {t.quote}
-                </p>
-                <div className="flex items-center gap-3 px-7 pb-7 pt-4 mt-1 border-t border-espresso/5">
-                  <img
-                    src={t.img}
-                    alt={t.name}
-                    className="w-10 h-10 rounded-full object-cover ring-2 ring-cream"
-                  />
-                  <div>
-                    <p className="text-sm font-semibold text-espresso">
-                      {t.name}
-                    </p>
-                    <p className="text-xs text-espresso/40">
-                      {t.role}
+          {isMobile ? (
+            <div className="space-y-4">
+              {(showAllReviews ? testimonials : testimonials.slice(0, 2)).map((t, i) => (
+                <div key={i} className="review-card review-card-bg review-card-hover w-full" style={{ position: "relative", overflow: "hidden" }}>
+                  <Quotes className="w-6 h-6 text-terracotta/6 absolute top-4 right-4" weight="fill" />
+                  <div className="px-5 pt-6">
+                    <div className="flex items-center gap-3">
+                      {[1, 2, 3, 4, 5].map((s) => (
+                        <Star key={s} className="w-4 h-4 text-terracotta" weight="fill" />
+                      ))}
+                    </div>
+                    <p className="text-sm leading-relaxed text-espresso/70 mt-3">
+                      {t.quote}
                     </p>
                   </div>
+                  <div className="flex items-center gap-3 px-5 pb-5 pt-4 mt-3 border-t border-espresso/5">
+                    <img src={t.img} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-cream" loading="lazy" decoding="async" />
+                    <div>
+                      <p className="text-sm font-semibold text-espresso">{t.name}</p>
+                      <p className="text-xs text-espresso/40">{t.role}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
-            {/* CTA Card */}
-            <div
-              onClick={() => setModalOpen(true)}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                setMousePos({
-                  x: ((e.clientX - rect.left) / rect.width) * 100,
-                  y: ((e.clientY - rect.top) / rect.height) * 100,
-                });
-              }}
-              className="review-card cta-review cursor-pointer flex flex-col items-center justify-center text-center px-7 py-10"
-              style={{ '--mouse-x': `${mousePos.x}%`, '--mouse-y': `${mousePos.y}%` }}
-            >
-              <div className="w-14 h-14 bg-terracotta/10 rounded-2xl flex items-center justify-center mb-4 hover:bg-terracotta/15 transition-colors duration-300">
-                <PenNib className="w-6 h-6 text-terracotta transition-transform duration-300 pen-nib-icon" weight="fill" />
-              </div>
-              <h3 className="font-display text-base text-espresso mb-1" style={{ fontFamily: "var(--font-display)" }}>
-                Share your experience
-              </h3>
-              <p className="text-xs text-espresso/50 leading-relaxed max-w-[200px]">
-                Loved your visit? We'd be honored to hear about it.
-              </p>
-              <div className="flex items-center gap-1.5 text-terracotta font-semibold text-xs mt-4 transition-all duration-300 cta-arrow-wrapper">
-                Write a Review
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 cta-arrow" weight="bold" />
+              <div className="flex justify-center mt-3">
+                <button onClick={() => setShowAllReviews(s => !s)} className="px-4 py-2 bg-terracotta text-cream rounded-lg">
+                  {showAllReviews ? 'Show less' : 'Show more'}
+                </button>
               </div>
             </div>
-          </div>
+          ) : (
+            <div
+              ref={carouselRef}
+              className="carousel-scroll"
+            >
+              {testimonials.map((t, i) => (
+                <div key={i} className="review-card review-card-bg review-card-hover" style={{ position: "relative", overflow: "hidden" }}>
+                  <Quotes className="w-8 h-8 text-terracotta/6 absolute top-5 right-5" weight="fill" />
+                  <div className="flex items-center gap-1 px-7 pt-7">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} className="w-4 h-4 text-terracotta" weight="fill" />
+                    ))}
+                  </div>
+                  <p className="text-sm leading-relaxed text-espresso/70 px-7 pt-3 pb-2">
+                    {t.quote}
+                  </p>
+                  <div className="flex items-center gap-3 px-7 pb-7 pt-4 mt-1 border-t border-espresso/5">
+                    <img src={t.img} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-cream" loading="lazy" decoding="async" />
+                    <div>
+                      <p className="text-sm font-semibold text-espresso">{t.name}</p>
+                      <p className="text-xs text-espresso/40">{t.role}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
 
-          <div className="carousel-hint mt-4">
-            <ArrowRight className="w-4 h-4" weight="bold" />
-            Swipe to explore more reviews
-          </div>
+              {/* CTA Card */}
+              <div
+                onClick={() => setModalOpen(true)}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setMousePos({
+                    x: ((e.clientX - rect.left) / rect.width) * 100,
+                    y: ((e.clientY - rect.top) / rect.height) * 100,
+                  });
+                }}
+                className="review-card cta-review cursor-pointer flex flex-col items-center justify-center text-center px-7 py-10"
+                style={{ '--mouse-x': `${mousePos.x}%`, '--mouse-y': `${mousePos.y}%` }}
+              >
+                <div className="w-14 h-14 bg-terracotta/10 rounded-2xl flex items-center justify-center mb-4 hover:bg-terracotta/15 transition-colors duration-300">
+                  <PenNib className="w-6 h-6 text-terracotta transition-transform duration-300 pen-nib-icon" weight="fill" />
+                </div>
+                <h3 className="font-display text-base text-espresso mb-1" style={{ fontFamily: "var(--font-display)" }}>
+                  Share your experience
+                </h3>
+                <p className="text-xs text-espresso/50 leading-relaxed max-w-[200px]">
+                  Loved your visit? We'd be honored to hear about it.
+                </p>
+                <div className="flex items-center gap-1.5 text-terracotta font-semibold text-xs mt-4 transition-all duration-300 cta-arrow-wrapper">
+                  Write a Review
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 cta-arrow" weight="bold" />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
 
