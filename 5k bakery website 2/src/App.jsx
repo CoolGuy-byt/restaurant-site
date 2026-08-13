@@ -448,53 +448,7 @@ function Hero() {
   );
 }
 
-/* ─── MARQUEE SECTION ─── */
-function Marquee() {
-  const items = [
-    "Sourdough", "Croissants", "Brioche", "Baguettes", "Pain au Chocolat",
-    "Cinnamon Rolls", "Focaccia", "Danish Pastry", "Muffins", "Tartlets",
-    "Rye Bread", "Ciabatta",
-  ];
-
-  return (
-    <div className="py-8 bg-espresso overflow-hidden marquee-section">
-      <div className="flex items-center gap-20 w-max marquee-track">
-        {items.map((item, i) => (
-          <span
-            key={i}
-            className="flex-shrink-0 text-cream/70 text-lg font-display italic tracking-wide whitespace-nowrap"
-          >
-            {item}
-          </span>
-        ))}
-        {items.map((item, i) => (
-          <span
-            key={`r-${i}`}
-            className="flex-shrink-0 text-cream/70 text-lg font-display italic tracking-wide whitespace-nowrap"
-          >
-            {item}
-          </span>
-        ))}
-        {items.map((item, i) => (
-          <span
-            key={`r2-${i}`}
-            className="flex-shrink-0 text-cream/70 text-lg font-display italic tracking-wide whitespace-nowrap"
-          >
-            {item}
-          </span>
-        ))}
-        {items.map((item, i) => (
-          <span
-            key={`r3-${i}`}
-            className="flex-shrink-0 text-cream/70 text-lg font-display italic tracking-wide whitespace-nowrap"
-          >
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
+/* Marquee removed: mobile UX preferred without it */
 
 /* ─── ABOUT / PHILOSOPHY ─── */
 function About() {
@@ -1858,7 +1812,6 @@ function AppInner() {
           >
             <Navbar />
             <Hero />
-            <Marquee />
             <About />
             <Philosophy />
             <Products />
