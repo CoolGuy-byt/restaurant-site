@@ -691,8 +691,8 @@ function MobileCarousel({ images = [], onOpen }) {
         onTouchEnd={onTouchEnd}
       >
         {images.map((im, i) => (
-          <div key={i} className="w-full flex-shrink-0 px-0">
-            <div className="aspect-square w-full overflow-hidden rounded-2xl bg-[var(--color-warm-stone)] max-h-[70vh] flex items-center justify-center">
+          <div key={i} className="flex-shrink-0 px-0" style={{ width: `${100 / images.length}%` }}>
+            <div className="aspect-[1/1] w-full overflow-hidden rounded-2xl bg-[var(--color-warm-stone)] max-h-[70vh] flex items-center justify-center">
               <img
                 src={im.img}
                 alt={im.title}
@@ -710,8 +710,8 @@ function MobileCarousel({ images = [], onOpen }) {
         ))}
       </div>
 
-      {/* Dots */}
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-3 flex gap-2">
+      {/* Dots (below captions to avoid overlap) */}
+      <div className="mt-3 flex justify-center gap-2 px-2">
         {images.map((_, i) => (
           <button
             key={i}
