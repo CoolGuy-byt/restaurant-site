@@ -101,13 +101,26 @@
   100% { transform: translateX(-50%); }
 }
 
-.marquee-track {
-  display: flex;
-  align-items: center;
-  animation: marquee-left 40s linear infinite;
+/* Ensure marquee shows only on desktop and is explicitly hidden on mobile.
+   This overrides any utility-class issues and guarantees consistent behavior. */
+.marquee-section {
+  display: none;
 }
 
-.marquee-track:hover { animation-play-state: paused; }
+@media (min-width: 1024px) {
+  .marquee-section {
+    display: block;
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content; /* keep track width to content for seamless looping */
+    animation: marquee-left 40s linear infinite;
+  }
+
+  .marquee-track:hover { animation-play-state: paused; }
+}
 
 /* ─── Horizontal Review Carousel ─── */
 
