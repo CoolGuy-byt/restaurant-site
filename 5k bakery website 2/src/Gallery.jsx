@@ -586,17 +586,17 @@ export default function Gallery() {
           <div className="w-full max-w-md mx-auto">
             <div className="rounded-2xl overflow-hidden bg-[var(--color-warm-stone)] max-h-[70vh] flex items-center justify-center">
               <img
-                src={galleryImages[0].img}
-                alt={galleryImages[0].title}
+                src={galleryImages[5].img}
+                alt={galleryImages[5].title}
                 className="max-w-full max-h-full object-contain"
                 loading="lazy"
                 decoding="async"
-                onClick={() => openLightbox(0)}
+                onClick={() => openLightbox(5)}
               />
             </div>
             <div className="px-4 py-3">
-              <h4 className="font-display text-lg text-espresso" style={{ fontFamily: 'var(--font-display)' }}>{galleryImages[0].title}</h4>
-              <p className="text-xs text-espresso/60 mt-2">{galleryImages[0].desc}</p>
+              <h4 className="font-display text-lg text-espresso" style={{ fontFamily: 'var(--font-display)' }}>{galleryImages[5].title}</h4>
+              <p className="text-xs text-espresso/60 mt-2">{galleryImages[5].desc}</p>
             </div>
           </div>
         )}
