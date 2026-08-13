@@ -98,10 +98,12 @@
 /* Marquee animation (desktop only) */
 @keyframes marquee-left {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-25%); }
+  100% { transform: translateX(-50%); }
 }
 
 .marquee-track {
+  display: flex;
+  align-items: center;
   animation: marquee-left 40s linear infinite;
 }
 

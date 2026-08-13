@@ -497,6 +497,22 @@ function Marquee() {
   );
 }
 
+function MobileDivider() {
+  return (
+    <div className="lg:hidden py-6">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="flex items-center justify-center gap-4">
+          <div className="w-12 h-px bg-terracotta/20" />
+          <div className="w-9 h-9 rounded-full bg-terracotta/8 flex items-center justify-center">
+            <Grains className="w-4 h-4 text-terracotta" weight="fill" />
+          </div>
+          <div className="w-12 h-px bg-terracotta/20" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── ABOUT / PHILOSOPHY ─── */
 function About() {
   return (
@@ -1860,6 +1876,7 @@ function AppInner() {
             <Navbar />
             <Hero />
             <Marquee />
+            <MobileDivider />
             <About />
             <Philosophy />
             <Products />
