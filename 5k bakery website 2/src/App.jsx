@@ -401,6 +401,7 @@ function Hero() {
               {/* Main hero image */}
               <motion.div
                 className="rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl shadow-espresso/10"
+                style={{ backgroundColor: "var(--color-warm-stone)" }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5, ease: EASE_OUT }}
               >
@@ -522,7 +523,7 @@ function About() {
           {/* Left - Image (larger, asymmetric) */}
           <div className="lg:col-span-7">
             <Reveal className="relative">
-              <div className="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl shadow-espresso/5">
+              <div className="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl shadow-espresso/5" style={{ backgroundColor: "var(--color-warm-stone)" }}>
                 <img
                   src={aboutBakeryImg}
                   alt="Bakery interior with warm lighting"
@@ -831,7 +832,7 @@ function Products() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
-                  <div className="rounded-2xl overflow-hidden bg-white shadow-sm shadow-espresso/5 aspect-[4/5] relative">
+                  <div className="rounded-2xl overflow-hidden shadow-sm shadow-espresso/5 aspect-[4/5] relative" style={{ backgroundColor: "var(--color-warm-stone)" }}>
                     <img
                       src={product.img}
                       alt={product.name}
@@ -932,8 +933,9 @@ function Featured() {
           {/* Image - right offset, large */}
           <div className="lg:col-span-5 lg:-ml-12 lg:order-2">
             <Reveal delay={0.2}>
-              <motion.div
+                <motion.div
                 className="rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl shadow-espresso/10"
+                style={{ backgroundColor: "var(--color-warm-stone)" }}
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.5, ease: EASE_OUT }}
               >
