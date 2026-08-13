@@ -47,15 +47,27 @@
   /* Prevent flicker on mobile by using an explicit load state and GPU hints */
   img {
     opacity: 1;
-    transition: opacity 240ms ease-in-out;
+    transition: opacity 240ms ease-in-out, filter 300ms ease-in-out;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transform: translateZ(0);
     will-change: opacity, transform;
+    background-color: var(--color-warm-stone);
+    object-fit: cover;
   }
 
   img[data-loaded="false"] {
     opacity: 0;
+    filter: blur(6px) saturate(0.9);
+    transform: scale(1.02);
+    background-color: var(--color-warm-stone);
+    min-height: 1px; /* ensure placeholder area paints */
+  }
+
+  img[data-loaded="true"] {
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 }
 
