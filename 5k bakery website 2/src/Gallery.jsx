@@ -692,11 +692,11 @@ function MobileCarousel({ images = [], onOpen }) {
       >
         {images.map((im, i) => (
           <div key={i} className="w-full flex-shrink-0 px-0">
-            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[var(--color-warm-stone)]">
+            <div className="aspect-square w-full overflow-hidden rounded-2xl bg-[var(--color-warm-stone)] max-h-[70vh] flex items-center justify-center">
               <img
                 src={im.img}
                 alt={im.title}
-                className="w-full h-full object-cover"
+                className="max-w-full max-h-full object-contain"
                 loading="lazy"
                 decoding="async"
                 onClick={() => onOpen(i)}
