@@ -110,6 +110,7 @@
 @media (min-width: 1024px) {
   .marquee-section {
     display: block;
+    visibility: visible; /* override critical inline CSS that hides marquee until CSS loads */
   }
 
   .marquee-track {
