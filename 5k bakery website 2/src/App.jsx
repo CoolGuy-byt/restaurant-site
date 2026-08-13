@@ -1327,6 +1327,20 @@ function Testimonials() {
                 </div>
               ))}
 
+              {/* Mobile CTA: Share your experience */}
+              <div className="mt-2">
+                <div
+                  onClick={() => setModalOpen(true)}
+                  className="review-card cta-review cursor-pointer flex flex-col items-center justify-center text-center px-6 py-6 w-full rounded-2xl bg-terracotta/6"
+                >
+                  <div className="w-12 h-12 bg-terracotta/10 rounded-2xl flex items-center justify-center mb-3">
+                    <PenNib className="w-5 h-5 text-terracotta" weight="fill" />
+                  </div>
+                  <h4 className="font-semibold text-espresso mb-1">Share your experience</h4>
+                  <p className="text-xs text-espresso/60">Loved your visit? Tell us about it.</p>
+                </div>
+              </div>
+
               <div className="flex justify-center mt-3">
                 <button onClick={() => setShowAllReviews(s => !s)} className="px-4 py-2 bg-terracotta text-cream rounded-lg">
                   {showAllReviews ? 'Show less' : 'Show more'}

@@ -243,7 +243,7 @@ function ImageTile({ image, index, onClick, rowSpan = 1 }) {
 function PullQuote({ quote, delay = 0 }) {
   return (
     <Reveal delay={delay} y={32}>
-      <div className="rounded-2xl bg-white/50 backdrop-blur-sm border border-terracotta/8 p-6 md:p-8 shadow-sm shadow-espresso/3 hover:shadow-md hover:shadow-espresso/5 hover:border-terracotta/15 transition-all duration-500 h-auto md:h-full flex flex-col justify-between">
+      <div className="relative rounded-2xl bg-white/50 backdrop-blur-sm border border-terracotta/8 p-6 md:p-8 shadow-sm shadow-espresso/3 hover:shadow-md hover:shadow-espresso/5 hover:border-terracotta/15 transition-all duration-500 h-auto md:h-full flex flex-col justify-between">
         {/* Top: icon + quote */}
         <div>
           <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-terracotta/40 via-terracotta/20 to-transparent rounded-l-2xl" />
