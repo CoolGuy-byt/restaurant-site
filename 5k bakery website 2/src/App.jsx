@@ -52,6 +52,19 @@ function handleImgLoad(e) {
   }
 }
 
+// Small SVG LQIP placeholders (warm gradient) for hero and about images
+const lqipHero =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' width='800' height='1000' viewBox='0 0 800 1000'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23E8DDD0'/><stop offset='1' stop-color='%23F5EDE3'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/></svg>"
+  );
+
+const lqipAbout =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' width='600' height='450' viewBox='0 0 600 450'><defs><linearGradient id='g2' x1='0' x2='1'><stop offset='0' stop-color='%23F5EDE3'/><stop offset='1' stop-color='%23E8DDD0'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g2)'/></svg>"
+  );
+
 /* ─── EASING CONSTANTS ─── */
 const EASE_OUT = [0.16, 1, 0.3, 1];
 const EASE_SPRING = [0.23, 1, 0.32, 1];
@@ -401,7 +414,12 @@ function Hero() {
               {/* Main hero image */}
               <motion.div
                 className="rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl shadow-espresso/10"
-                style={{ backgroundColor: "var(--color-warm-stone)" }}
+                style={{
+                  backgroundColor: "var(--color-warm-stone)",
+                  backgroundImage: `url("${lqipHero}")`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5, ease: EASE_OUT }}
               >
@@ -523,7 +541,15 @@ function About() {
           {/* Left - Image (larger, asymmetric) */}
           <div className="lg:col-span-7">
             <Reveal className="relative">
-              <div className="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl shadow-espresso/5" style={{ backgroundColor: "var(--color-warm-stone)" }}>
+              <div
+                className="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl shadow-espresso/5"
+                style={{
+                  backgroundColor: "var(--color-warm-stone)",
+                  backgroundImage: `url("${lqipAbout}")`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
                 <img
                   src={aboutBakeryImg}
                   alt="Bakery interior with warm lighting"
