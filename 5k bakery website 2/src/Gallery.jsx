@@ -581,9 +581,24 @@ export default function Gallery() {
           </div>
         )}
 
-        {/* Mobile-only carousel: single-image swipeable viewer */}
+        {/* Mobile: show a single static image to avoid missing/buggy carousel */}
         {isMobile && (
-          <MobileCarousel images={galleryImages} onOpen={openLightbox} />
+          <div className="w-full max-w-md mx-auto">
+            <div className="rounded-2xl overflow-hidden bg-[var(--color-warm-stone)] max-h-[70vh] flex items-center justify-center">
+              <img
+                src={galleryImages[0].img}
+                alt={galleryImages[0].title}
+                className="max-w-full max-h-full object-contain"
+                loading="lazy"
+                decoding="async"
+                onClick={() => openLightbox(0)}
+              />
+            </div>
+            <div className="px-4 py-3">
+              <h4 className="font-display text-lg text-espresso" style={{ fontFamily: 'var(--font-display)' }}>{galleryImages[0].title}</h4>
+              <p className="text-xs text-espresso/60 mt-2">{galleryImages[0].desc}</p>
+            </div>
+          </div>
         )}
 
         {/* ─── Bottom Signature ─── */}
@@ -614,113 +629,4 @@ export default function Gallery() {
   );
 }
 
-/* ─── MOBILE CAROUSEL ─── */
-function MobileCarousel({ images = [], onOpen }) {
-  const [index, setIndex] = useState(0);
-  const containerRef = useRef(null);
-  const startX = useRef(0);
-  const deltaX = useRef(0);
-  const isDragging = useRef(false);
-  const autoplay = useRef(null);
-
-  useEffect(() => {
-    // autoplay every 4s
-    autoplay.current = setInterval(() => {
-      setIndex((i) => (i + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(autoplay.current);
-  }, [images.length]);
-
-  // update translate when index changes
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    el.style.transition = 'transform 480ms cubic-bezier(.16,1,.3,1)';
-    el.style.transform = `translateX(${ -index * 100 }%)`;
-  }, [index]);
-
-  const stopAutoplay = () => { clearInterval(autoplay.current); };
-  const restartAutoplay = () => {
-    clearInterval(autoplay.current);
-    autoplay.current = setInterval(() => setIndex((i) => (i + 1) % images.length), 4000);
-  };
-
-  const onTouchStart = (e) => {
-    stopAutoplay();
-    startX.current = e.touches[0].clientX;
-    deltaX.current = 0;
-    isDragging.current = true;
-    const el = containerRef.current;
-    if (el) el.style.transition = 'none';
-  };
-
-  const onTouchMove = (e) => {
-    if (!isDragging.current) return;
-    deltaX.current = e.touches[0].clientX - startX.current;
-    const el = containerRef.current;
-    if (el) el.style.transform = `translateX(calc(${ -index * 100 }% + ${deltaX.current}px))`;
-  };
-
-  const onTouchEnd = () => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    const threshold = 50; // px
-    if (Math.abs(deltaX.current) > threshold) {
-      if (deltaX.current > 0) setIndex((i) => (i - 1 + images.length) % images.length);
-      else setIndex((i) => (i + 1) % images.length);
-    } else {
-      // snap back
-      const el = containerRef.current;
-      if (el) {
-        el.style.transition = 'transform 360ms cubic-bezier(.16,1,.3,1)';
-        el.style.transform = `translateX(${ -index * 100 }%)`;
-      }
-    }
-    deltaX.current = 0;
-    restartAutoplay();
-  };
-
-  return (
-    <div className="mobile-carousel relative w-full overflow-hidden rounded-2xl">
-      <div
-        ref={containerRef}
-        className="flex w-[100%]"
-        style={{ width: `${images.length * 100}%`, touchAction: 'pan-y' }}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
-        {images.map((im, i) => (
-          <div key={i} className="flex-shrink-0 px-0" style={{ width: `${100 / images.length}%` }}>
-            <div className="aspect-[1/1] w-full overflow-hidden rounded-2xl bg-[var(--color-warm-stone)] max-h-[70vh] flex items-center justify-center">
-              <img
-                src={im.img}
-                alt={im.title}
-                className="max-w-full max-h-full object-contain"
-                loading="lazy"
-                decoding="async"
-                onClick={() => onOpen(i)}
-              />
-            </div>
-            <div className="px-4 py-3">
-              <h4 className="font-display text-lg text-espresso" style={{ fontFamily: 'var(--font-display)' }}>{im.title}</h4>
-              <p className="text-xs text-espresso/60 mt-2">{im.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Dots (below captions to avoid overlap) */}
-      <div className="mt-3 flex justify-center gap-2 px-2">
-        {images.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => { setIndex(i); restartAutoplay(); }}
-            className={`w-2.5 h-2.5 rounded-full ${i === index ? 'bg-terracotta' : 'bg-white/60'}`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+/* Mobile carousel removed: showing a single static image on mobile for reliability */
