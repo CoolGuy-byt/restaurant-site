@@ -519,17 +519,17 @@ export default function Gallery() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5 auto-rows-auto sm:auto-rows-fr">
 
           {/* ROW 1: COL 1-2 (wide) — New dawn image filling the top-left gap */}
-          <div className="md:col-span-1 lg:col-span-2 md:min-h-[260px]">
+          <div className="col-span-1 md:col-span-2 lg:col-span-2 md:min-h-[260px]">
             <ImageTile image={galleryImages[7]} index={7} onClick={openLightbox} rowSpan={1} />
           </div>
 
           {/* ROW 1-2: COL 3 — Pull quote */}
-          <div className="md:col-span-1 row-span-2">
+          <div className="col-span-1 md:col-span-1 md:row-span-2">
             <PullQuote quote={galleryQuotes[0]} delay={0.1} />
           </div>
 
           {/* ROW 1-2: COL 4 — Tall image */}
-          <div className="md:col-span-1 row-span-2">
+          <div className="col-span-1 md:col-span-1 md:row-span-2">
             <ImageTile image={galleryImages[5]} index={5} onClick={openLightbox} rowSpan={2} />
           </div>
 
@@ -551,7 +551,7 @@ export default function Gallery() {
           <ImageTile image={galleryImages[4]} index={4} onClick={openLightbox} />
 
           {/* ROW 4: Full-width decorative quote divider */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-4">
+          <div className="col-span-1 md:col-span-3 lg:col-span-4">
             <DecorativeQuote />
           </div>
 
