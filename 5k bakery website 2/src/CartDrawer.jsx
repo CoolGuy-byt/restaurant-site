@@ -103,6 +103,10 @@ export default function CartDrawer() {
                           src={item.img}
                           alt={item.name}
                           className="w-full h-full object-cover"
+                          data-loaded="false"
+                          onLoad={(e) => e.currentTarget.setAttribute('data-loaded','true')}
+                          decoding="async"
+                          loading="lazy"
                         />
                       </div>
 

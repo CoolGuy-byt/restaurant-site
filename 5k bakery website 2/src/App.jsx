@@ -44,6 +44,14 @@ import focacciaRosemaryImg from "./assets/focaccia-rosemary.jpg";
 import lemonTartImg from "./assets/lemon-tart.jpg";
 import sundayLoafImg from "./assets/sunday-loaf.jpg";
 
+function handleImgLoad(e) {
+  try {
+    e.currentTarget.setAttribute("data-loaded", "true");
+  } catch (err) {
+    /* ignore */
+  }
+}
+
 /* ─── EASING CONSTANTS ─── */
 const EASE_OUT = [0.16, 1, 0.3, 1];
 const EASE_SPRING = [0.23, 1, 0.32, 1];
@@ -356,7 +364,7 @@ function Hero() {
             <Reveal delay={0.8}>
               <div className="mt-10 flex items-center gap-8">
                 <div className="flex -space-x-3">
-                  {[1, 2, 3, 4].map((i) => (
+                      {[1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
                       className="w-10 h-10 rounded-full border-2 border-cream bg-warm-stone overflow-hidden"
@@ -365,6 +373,10 @@ function Hero() {
                         src={`https://picsum.photos/seed/baker${i}/80/80`}
                         alt=""
                         className="w-full h-full object-cover"
+                        data-loaded="false"
+                        onLoad={handleImgLoad}
+                        decoding="async"
+                        loading="lazy"
                       />
                     </div>
                   ))}
@@ -396,6 +408,10 @@ function Hero() {
                   src={heroImg}
                   alt="Fresh artisan bread from the oven"
                   className="w-full h-full object-cover"
+                  data-loaded="false"
+                  onLoad={handleImgLoad}
+                  decoding="async"
+                  loading="eager"
                 />
               </motion.div>
 
@@ -511,6 +527,10 @@ function About() {
                   src={aboutBakeryImg}
                   alt="Bakery interior with warm lighting"
                   className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700 ease-out"
+                  data-loaded="false"
+                  onLoad={handleImgLoad}
+                  decoding="async"
+                  loading="lazy"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 w-40 h-40 rounded-3xl border-2 border-terracotta/20 -z-10" />
@@ -816,6 +836,10 @@ function Products() {
                       src={product.img}
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700 ease-out"
+                      data-loaded="false"
+                      onLoad={handleImgLoad}
+                      decoding="async"
+                      loading="lazy"
                     />
                     {/* Overlay on hover */}
                     <div className="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/15 transition-colors duration-300" />
@@ -917,6 +941,10 @@ function Featured() {
                   src={sundayLoafImg}
                   alt="The Sunday Loaf - signature sourdough"
                   className="w-full h-full object-cover"
+                  data-loaded="false"
+                  onLoad={handleImgLoad}
+                  decoding="async"
+                  loading="lazy"
                 />
               </motion.div>
             </Reveal>

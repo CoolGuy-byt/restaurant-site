@@ -43,6 +43,20 @@
     display: block;
     max-width: 100%;
   }
+
+  /* Prevent flicker on mobile by using an explicit load state and GPU hints */
+  img {
+    opacity: 1;
+    transition: opacity 240ms ease-in-out;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: opacity, transform;
+  }
+
+  img[data-loaded="false"] {
+    opacity: 0;
+  }
 }
 
 @layer utilities {
