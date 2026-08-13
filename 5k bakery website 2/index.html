@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ember & Crust — Artisan Bakery</title>
+    <meta name="theme-color" content="#FDF6EE" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <style>
+      /* Critical inlined styles to prevent white flash before CSS loads */
+      :root{--color-cream:#FDF6EE;--color-espresso:#2C1810}
+      html,body,#root{background:var(--color-cream);color:var(--color-espresso);height:100%;min-height:100vh}
+      img{display:block;max-width:100%}
+      img[data-loaded="false"]{opacity:0;transition:opacity 240ms ease-in-out}
+      .marquee-section{visibility:hidden}
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
